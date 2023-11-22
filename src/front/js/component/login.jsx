@@ -39,7 +39,7 @@ export const Login = () => {
         <div className="col-md-6 col-lg-4">
           <div className="card p-4 bg-dark text-white">
             <h2 className="text-center mb-4">Comienza tu aventura!</h2>
-            <p className="text-center text-white mb-4">Aun no estas registrado? Entra aqui</p>
+            <p className="text-center text-white mb-4">Aun no estas registrado? <a href="/signup">Entra aqui</a></p>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">Correo Electrónico:</label>

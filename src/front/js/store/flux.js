@@ -21,15 +21,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			apiFetch: async (route, method = "GET", body = null) => {
+
+				let parametros = {method}
+				if (body) parametros.body = body
+
+				const respuesta = await fetch(process.env.BACKEND_URL + route, parametros)
+				if (!respuesta.ok) return { "msg": "error: " + respuesta.statusText }
+				const data = await respuesta.json()
+				return {data, "msg": "ok"}
+			},
+
+			login: async (email, password) => {
+				const {apiFetch} = getActions()
+				apiFetch("/login", "POST", {email, password})
+			},
+
+			signup: async () => {
+				
+			},
+
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
