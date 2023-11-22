@@ -29,6 +29,7 @@ export const Login = () => {
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    fontFamily: 'Unbounded, sans-serif', 
     height: '100vh',
   };
 
