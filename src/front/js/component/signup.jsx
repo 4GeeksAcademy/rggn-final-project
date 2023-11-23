@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {Context} from "../store/appContext.js";
 import backgroundImage from '../../img/backgroundsignup.jpg';
 
 export const Signup = () => {
+
+  const { store, actions } = useContext(Context)
+
   const [formData, setFormData] = useState({
-    user_name: '',
+    name: '',
     email: '',
     password: '',
-    country: '',
+    countries: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +28,12 @@ export const Signup = () => {
     console.log('Formulario enviado:', formData);
 
   };
+
+  const signupClick = async (e) => {
+    e.preventDefault()
+    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)
+    console.log(respuesta)
+  }
 
   const backgroundStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -47,13 +57,13 @@ export const Signup = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="user_name" className="form-label">Nombre de Usuario:</label>
+                  <label htmlFor="name" className="form-label">Nombre de Usuario:</label>
                   <input
                     type="text"
                     className="form-control bg-secondary"
-                    id="user_name"
-                    name="user_name"
-                    value={formData.user_name}
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
                   />
@@ -76,12 +86,12 @@ export const Signup = () => {
                   <label htmlFor="country" className="form-label">Pais:</label>
                   <select
                     className="form-select"
-                    name="country"
+                    name="countries"
                     onChange={handleChange}
                   >
                     <option value={0} selected>select your country</option>
-                    {countries.map((country, index) => {
-                      return (<option key={index} value={country}>{country}</option>)
+                    {countries.map((countries, index) => {
+                      return (<option key={index} value={countries}>{countries}</option>)
                     })}
                   </select>
                 </div>
@@ -109,7 +119,7 @@ export const Signup = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button type="submit" className="btn btn-primary w-100">Iniciar sesión</button>
+                  <button onClick={signupClick} className="btn btn-primary w-100">Iniciar sesión</button>
                 </div>
               </form>
             </div>
