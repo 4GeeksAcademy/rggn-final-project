@@ -62,7 +62,7 @@ export const Landing = () => {
                     </div>
                     <div className="card-footer">
                         <div className="d-flex flex-column justify-content-between">
-                            <button className="btn btn-dark mb-3 text-warning btn-lg" onClick={handleRegister}>Registrarse</button>
+                            <Link to="/signup" className="btn btn-dark mb-3 text-warning btn-lg">Registrarse</Link>
                             <Link to="/login" className="btn btn-dark mb-3 text-warning btn-lg">Iniciar sesión</Link>
                         </div>
                     </div>
