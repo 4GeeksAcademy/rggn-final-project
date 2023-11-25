@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import landingImage from '../../img/landing.jpg';
+import HomeImage from '../../img/landing.jpg';
 import logoImage from '../../img/logotipo.png';
 import '../../styles/index.css';
 
-export const Landing = () => {
+export const Home = () => {
     const handleLogin = () => {
         console.log("Iniciar sesión");
     };
@@ -26,8 +26,8 @@ export const Landing = () => {
         border: 'none'
     };
 
-    const landingStyle = {
-        backgroundImage: `url(${landingImage})`,
+    const HomeStyle = {
+        backgroundImage: `url(${HomeImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',
@@ -37,7 +37,7 @@ export const Landing = () => {
     };
 
     return (
-        <div style={landingStyle}>
+        <div style={HomeStyle}>
             <div className="container-fluid position-relative">
                 <img
                     src={logoImage}
