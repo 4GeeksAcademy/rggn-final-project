@@ -18,11 +18,11 @@ export const Home = () => {
         position: 'relative',
         backgroundColor: 'transparent',
         color: 'white',
-        height: '70vh',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        fontFamily: 'Unbounded, sans-serif', 
+        fontFamily: 'Unbounded, sans-serif',
         border: 'none'
     };
 
@@ -69,4 +69,5 @@ export const Home = () => {
                 </div>
             </div>
         </div>
-    )}
+    )
+}
