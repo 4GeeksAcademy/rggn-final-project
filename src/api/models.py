@@ -38,3 +38,29 @@ class Countries(db.Model):
             "name": self.name,
 
         }
+
+class Posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    img = db.Column(db.String(300), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    categories = db.Column(db.String(50))
+    tags = db.Column(db.String(50))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User", backref= db.backref("posts"))
+
+
+
+    def __repr__(self):
+        return f'<Posts {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "img": self.email,
+            "comment": self.name,
+            "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
+            "categories": self.categories,
+            "tags": self.tags,
+            "user": self.user.serialize()
+        }
