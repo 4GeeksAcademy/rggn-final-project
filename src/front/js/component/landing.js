@@ -18,11 +18,11 @@ export const Home = () => {
         position: 'relative',
         backgroundColor: 'transparent',
         color: 'white',
-        height: '70vh',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        fontFamily: 'Unbounded, sans-serif', 
+        fontFamily: 'Unbounded, sans-serif',
         border: 'none'
     };
 
@@ -57,7 +57,7 @@ export const Home = () => {
                             <br /> En nuestro sitio, te ofrecemos la oportunidad de
                             <br />descubrir destinos emocionantes,
                             <br /> explorar nuevas culturas y vivir experiencias inolvidables.
-                            <br /> Únete a nosotros mientras exploramos el mundo juntos.
+                            <br /> Únete a nosotros mientras exploramos el mundo juntos!
                         </p>
                     </div>
                     <div className="card-footer">
@@ -69,4 +69,5 @@ export const Home = () => {
                 </div>
             </div>
         </div>
-    )}
+    )
+}
