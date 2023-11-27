@@ -48,7 +48,7 @@ export const Home = () => {
                                 <Link className="nav-link active custom-margin" to="/">Servicios</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active custom-margin" to="/">Sobre Nosotros</Link>
+                                <Link className="nav-link active custom-margin" to="/about">Sobre Nosotros</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link active custom-margin" to="/">Contacto</Link>
