@@ -57,10 +57,11 @@ class Posts(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "img": self.email,
-            "comment": self.name,
+            "img": self.img,
+            "comment": self.comment,
             "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
             "categories": self.categories,
             "tags": self.tags,
             "user": self.user.serialize()
         }
+
