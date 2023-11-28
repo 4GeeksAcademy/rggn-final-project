@@ -52,6 +52,13 @@ def handle_login():
                 return jsonify({"token":token}), 200
             else:
                 return jsonify({"message":"bad credentials"}), 400
+@api.route('/user', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    if len(users) < 1:
+        return jsonify({"msg": "not found"}), 404
+    serialized_users = list(map(lambda x: x.serialize(), users))
+    return serialized_users, 200
 
 @api.route('/signup', methods=['POST'])
 def handle_signup():

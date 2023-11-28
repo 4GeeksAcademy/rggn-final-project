@@ -10,6 +10,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Landing } from "./component/landing";
 import { Login } from "./component/login.jsx";
 import { Signup } from "./component/signup.jsx";
 
@@ -21,21 +22,22 @@ const Layout = () => {
 
     // if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") //return <BackendURL/ >; 
 
-        return (
-            <div>
-                <BrowserRouter basename={basename}>
-                    <ScrollToTop>
-                        {/* <Navbar />  */}
+    return (
+        <div>
+            <BrowserRouter basename={basename}>
+                <ScrollToTop>
+                    {/* <Navbar />  */}
 
-                        <Routes>
-                            <Route element={<Login />} path="/login" />
-                            <Route element={<Signup />} path="/signup" />
-                        </Routes>
+                    <Routes>
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<Signup />} path="/signup" />
+                        <Route element={<Home />} path="/" />
+                    </Routes>
 
-                    </ScrollToTop>
-                </BrowserRouter>
-            </div>
-        );
+                </ScrollToTop>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default injectContext(Layout);
