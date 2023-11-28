@@ -1,3 +1,10 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.my-card{
+    width: 18rem;
+}
+
+.my-posts{
+    overflow-y: scroll;
+}

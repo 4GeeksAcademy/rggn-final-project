@@ -12,6 +12,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Login } from "./component/login.jsx";
 import { Signup } from "./component/signup.jsx";
+import { PostViews } from "./component/postsViews.jsx"
 
 //create your first component
 const Layout = () => {
@@ -30,6 +31,7 @@ const Layout = () => {
                         <Routes>
                             <Route element={<Login />} path="/login" />
                             <Route element={<Signup />} path="/signup" />
+                            <Route element={<PostViews />} path="/postviews" />
                         </Routes>
 
                     </ScrollToTop>
