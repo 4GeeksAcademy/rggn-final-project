@@ -39,15 +39,46 @@ class Countries(db.Model):
 
         }
 
+
+class Categories(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Categories {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+
+        }
+    
+class Tags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Tags {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+
+        }
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     img = db.Column(db.String(300), nullable=False)
     comment = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    categories = db.Column(db.String(50))
-    tags = db.Column(db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     user = db.relationship("User", backref= db.backref("posts"))
+    categories_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    categories = db.relationship("Categories", backref= db.backref("posts"))
+    tags_id = db.Column(db.Integer, db.ForeignKey("tags.id"))
+    tags = db.relationship("Tags", backref= db.backref("posts"))
 
 
 
@@ -60,8 +91,7 @@ class Posts(db.Model):
             "img": self.img,
             "comment": self.comment,
             "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
-            "categories": self.categories,
-            "tags": self.tags,
+            "categories": self.categories.serialize(),
+            "tags": self.tags.serialize(),
             "user": self.user.serialize()
         }
-
