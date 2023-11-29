@@ -53,7 +53,7 @@ class Categories(db.Model):
             "name": self.name,
 
         }
-    
+
 class Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
@@ -92,6 +92,10 @@ class Posts(db.Model):
             "comment": self.comment,
             "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
             "categories": self.categories.serialize(),
-            "tags": self.tags.serialize(),
+            # "tags": self.tags_id.serialize(),
             "user": self.user.serialize()
         }
+    
+    def tags_serialize(self):
+        result = Tags.query.filter_by(id = self.tags_id).first()
+        return {"tags": result.serialize()}
