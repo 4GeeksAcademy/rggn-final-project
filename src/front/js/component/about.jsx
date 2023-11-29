@@ -20,7 +20,7 @@ const carouselContainerStyle = {
   position: 'fixed',
   bottom: '10px',
   left: '10px',
-  maxWidth: '80vh',
+  maxWidth: '75vh',
   marginLeft:'17vh',
   marginBottom:'4vh',
 };

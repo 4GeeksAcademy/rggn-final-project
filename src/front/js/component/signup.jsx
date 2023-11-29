@@ -40,6 +40,8 @@ export const Signup = () => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
+    fontFamily: 'Unbounded, sans-serif',
+    fontSize:'13px'
   };
 
   const countries = ["Venezuela", "Argentina", "Ecuador"]
@@ -51,7 +53,7 @@ export const Signup = () => {
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4">
-            <div className="card p-4 bg-dark text-white">
+            <div className="card p-2 px-3 bg-dark text-white">
               <h2 className="text-center mb-4">Comienza tu aventura!</h2>
               <p className="text-center text-white mb-4">Ya estás registrado? <a href="/login">Inicia sesion aqui</a></p>
 
