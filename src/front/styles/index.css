@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
@@ -8,3 +9,33 @@
 .my-posts{
     overflow-y: scroll;
 }
+=======
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+
+ 
+
+.navbar-nav .nav-link {
+  margin-right: 80px;
+  font-family: 'Unbounded', sans-serif;
+}
+
+.nav-link{
+  position: relative;
+}
+
+.nav-link::after{
+  opacity: 0;
+  transition: all 0.2s;
+  height: 2px;
+  width: 100%;
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content:'';
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+}
+>>>>>>> 301c646677510d2a85b6e79a0e2f17d2d79f0b35
