@@ -26,3 +26,10 @@
 .nav-link:hover::after {
   opacity: 1;
 }
+
+/* .container-carousel {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  max-width: 200px; 
+} */
