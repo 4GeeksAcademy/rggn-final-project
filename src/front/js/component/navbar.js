@@ -11,7 +11,7 @@ export const Navbar = () => {
 							<Link className="nav-link active custom-margin" to="/">Inicio</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link active custom-margin" to="/">Servicios</Link>
+							<Link className="nav-link active custom-margin" to="/services">Servicios</Link>
 						</li>
 						<li className="nav-item">
 							<Link className="nav-link active custom-margin" to="/about">Sobre Nosotros</Link>
