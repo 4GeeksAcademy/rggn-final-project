@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
-
  
 
 .navbar-nav .nav-link {
   margin-right: 80px;
-  font-family: 'Unbounded', sans-serif;
 }
 
 .nav-link{
   position: relative;
+  font-family: 'Unbounded', sans-serif;
 }
 
 .nav-link::after{
@@ -16,14 +15,14 @@
   transition: all 0.2s;
   height: 2px;
   width: 100%;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   position: absolute;
   bottom: 0;
   left: 0;
   content:'';
+
 }
 
 .nav-link:hover::after {
   opacity: 1;
 }
-
