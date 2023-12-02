@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import backgroundImage from '../../img/background.jpg';
+import { Context } from "../store/appContext";
+import {Navigate, useNavigate} from "react-router-dom"
 
 
 export const Login = () => {
+  const {actions} = useContext(Context)
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,10 +22,18 @@ export const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', formData);
-    
+    let result = await actions.login(formData)
+    console.log(formData);
+    if (result == 400){
+      alert("Bad Credentials")
+    }
+    if (result == 200){
+      alert("Bienvenido usuario")
+      // navigate("/posts")
+      // se descomenta cuando estén los cambios
+    }
   };
 
   const backgroundStyle = {
