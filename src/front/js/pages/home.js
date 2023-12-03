@@ -18,11 +18,12 @@ export const Home = () => {
         position: 'relative',
         backgroundColor: 'transparent',
         color: 'white',
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         fontFamily: 'Unbounded, sans-serif',
+        marginTop:'15vh',
+        marginRight:'4vh'
     };
 
     const HomeStyle = {
@@ -67,23 +68,17 @@ export const Home = () => {
             </div>
             <div className="container">
                 <div className="" style={cardStyle}>
-                    <div className="card-body mt-5 pt-5">
-                        <h1 className="text-center mb-4">
+                    <div className="card-body">
+                        <h1 className="text-center">
                             DESCUBRE <br /> EXPLORA <br /> VIVE
                         </h1>
-                        <p className="text-center mb-4">
+                        <p className="text-center">
                             Bienvenido a nuestra comunidad de viajeros y aventureros.
                             <br /> En nuestro sitio, te ofrecemos la oportunidad de
                             <br />descubrir destinos emocionantes,
                             <br /> explorar nuevas culturas y vivir experiencias inolvidables.
                             <br /> Únete a nosotros mientras exploramos el mundo juntos!
                         </p>
-                    </div>
-                    <div className="card-footer">
-                        <div className="d-flex flex-column justify-content-between mb-5">
-                            <Link to="/signup" className="btn btn-dark mb-3 text-warning">Registrarse</Link>
-                            <Link to="/login" className="btn btn-dark mb-3 text-warning">Iniciar sesión</Link>
-                        </div>
                     </div>
                 </div>
             </div>

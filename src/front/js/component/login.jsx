@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import backgroundImage from '../../img/background.jpg';
 import { Context } from "../store/appContext";
 import {Navigate, useNavigate} from "react-router-dom"
+import Swal from 'sweetalert2'
 
 
 export const Login = () => {
@@ -26,14 +27,23 @@ export const Login = () => {
     e.preventDefault();
     let result = await actions.login(formData)
     console.log(formData);
-    if (result == 400){
-      alert("Bad Credentials")
-    }
-    if (result == 200){
-      alert("Bienvenido usuario")
-      // navigate("/posts")
-      // se descomenta cuando estén los cambios
-    }
+    if (result === 400) {
+      Swal.fire({
+          title: 'Error!',
+          text: 'Credenciales incorrectas',
+          icon: 'error',
+          confirmButtonText: 'Cool'
+      });
+  } else if (result === 200) {
+      alert("Bienvenido usuario");
+      // navigate(posts)
+      Swal.fire({
+          title: 'Error!',
+          text: `Error inesperado: ${result}`,
+          icon: 'success',
+          confirmButtonText: 'Cool'
+      });
+  } 
   };
 
   const backgroundStyle = {
