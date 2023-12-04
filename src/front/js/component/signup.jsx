@@ -120,7 +120,7 @@ export const Signup = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button onClick={signupClick} className="btn btn-primary w-100">Iniciar sesión</button>
+                  <button onClick={signupClick} className="btn btn-primary w-100">Registrarme</button>
                 </div>
               </form>
             </div>

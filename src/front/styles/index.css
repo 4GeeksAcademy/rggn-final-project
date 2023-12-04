@@ -28,8 +28,24 @@
 }
 
 .donations-area {
-  background-image: linear-gradient(131deg, #202933, #69312c, #ac2f23, #f11313);
+  background-image: linear-gradient(131deg, #202933, #69312c, #ac2f23, #c22626);
+  background-size: 300% 100%;
+  animation: moveBackground1 15s linear infinite;
   color: #fff
+}
+
+@keyframes moveBackground1 {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
 
 .animated-text {
@@ -95,4 +111,24 @@
 
 .donations-area button {
   font-size: 2rem; /* Tamaño del botón */
+}
+
+.background-container {
+  background: linear-gradient(to right, #1f618d, #27ae60, #d4ac0d);
+  background-size: 300% 100%;
+  animation: moveBackground2 15s linear infinite;
+}
+
+@keyframes moveBackground2 {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }

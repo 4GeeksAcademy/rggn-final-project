@@ -27,7 +27,8 @@ const carouselContainerStyle = {
 
 export const About = () => {
   return (
-    <div style={backgroundStyle} className="text-white">
+    <div className="background-container">
+    <div style={backgroundStyle} className="bg-style text-white">
       <h1 className="mt-5 pt-2">CREAMOS TU AVENTURA</h1>
       <p className="mt-4">
         Explora el mundo con nosotros y descubre experiencias inolvidables.<br></br>
@@ -79,7 +80,7 @@ export const About = () => {
         </div>
       </div>
     </div>
-
+</div>
   );
 };
 
