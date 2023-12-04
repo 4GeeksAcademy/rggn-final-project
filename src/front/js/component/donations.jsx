@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCcPaypal } from '@fortawesome/free-brands-svg-icons';
 
 export const Donations = () => {
   const handleDonate = () => {
@@ -8,10 +10,19 @@ export const Donations = () => {
   };
 
   return (
-    <div>
-      <h1>¡Apoya nuestra causa!</h1>
-      <p>Tu contribución hace la diferencia.</p>
-      <button onClick={handleDonate}>Donar con PayPal</button>
+    <div className="donations-area">
+      <div className="container-fluid vh-100 d-flex align-items-center justify-content-center">
+        <div className="text-left pe-5 me-5">
+        <h1 className="animated-text">Crezcamos juntos.</h1>
+          <h5 className="fade-up">Tu contribución hace posible que sigamos brindando <br /><strong>servicios de calidad</strong> y <strong>contenidos valiosos.</strong> <br /> 
+            Al donar, estás invirtiendo en nuestro propósito, <br /> nos ayudas a crecer y mejorar continuamente.</h5>
+        </div>
+        <div className="text-right ps-5">
+          <button className="animated-btn btn btn-light btn-lg p-3 rounded-4" onClick={handleDonate}>
+            Donar aqui: <FontAwesomeIcon icon={faCcPaypal} style={{ color: "#000000", fontSize: "3rem", verticalAlign: "middle" }} className="ps-3" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

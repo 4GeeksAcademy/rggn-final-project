@@ -26,3 +26,73 @@
 .nav-link:hover::after {
   opacity: 1;
 }
+
+.donations-area {
+  background-image: linear-gradient(131deg, #202933, #69312c, #ac2f23, #f11313);
+  color: #fff
+}
+
+.animated-text {
+  display: inline-block;
+  white-space: nowrap;
+  border-right: 4px solid;
+  width: 0;
+  overflow: hidden;
+  animation: typing 2s steps(15) forwards, blink 0.5s infinite step-end alternate;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 15ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.animated-btn {
+  animation: shaking 2s infinite;
+}
+
+@keyframes shaking {
+  10%, 30% {
+    transform: translateX(-2px) rotate(5deg);
+  }
+
+  20% {
+    transform: translateX(2px) rotate(-5deg);
+  }
+
+  40% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 3s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.donations-area {
+  font-size: 1.5rem; /* Ajusta el tamaño del texto según tus necesidades */
+}
+
+.donations-area h1 {
+  font-size: 3rem; /* Tamaño del h1 */
+}
+
+.donations-area h5 {
+  font-size: 2rem; /* Tamaño del h5 */
+}
+
+.donations-area button {
+  font-size: 2rem; /* Tamaño del botón */
+}
