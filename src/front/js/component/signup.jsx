@@ -29,7 +29,7 @@ export const Signup = () => {
   };
 
   const signupClick = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)
     console.log(respuesta)
   }
@@ -118,7 +118,7 @@ export const Signup = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button onClick={signupClick} className="btn btn-primary w-100">Iniciar sesión</button>
+                  <a onClick={signupClick} className="btn btn-primary w-100" href="/postviews">Registrarse</a>
                 </div>
               </form>
             </div>
