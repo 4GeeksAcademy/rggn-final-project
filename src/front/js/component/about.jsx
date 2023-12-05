@@ -29,21 +29,21 @@ export const About = () => {
   return (
     <div className="background-container">
     <div style={backgroundStyle} className="bg-style text-white">
-      <h1 className="mt-5 pt-2">CREAMOS TU AVENTURA</h1>
-      <p className="mt-4">
+      <h1 className="fade-down mt-5 pt-2">CREAMOS TU AVENTURA</h1>
+      <p className="fade-right mt-4">
         Explora el mundo con nosotros y descubre experiencias inolvidables.<br></br>
         Desde rincones remotos hasta ciudades vibrantes, <br></br>
         estamos aquí para inspirarte y facilitar tus aventuras. <br></br>
         Descubre el mundo con RGGN!</p>
 
-      <h1 className="d-flex justify-content-end pe-5 me-5">QUIENES SOMOS?</h1>
-      <p className="d-flex justify-content-end me-3 pe-5"> Somos un equipo pequeño con un gran propósito.<br></br>
+      <h1 className="fade-left d-flex justify-content-end pe-5 me-5">QUIENES SOMOS?</h1>
+      <p className="fade-up d-flex justify-content-end me-3 pe-5"> Somos un equipo pequeño con un gran propósito.<br></br>
         Te ayudamos a descubrir tu destino perfecto. <br></br>
         Simplificamos el proceso para que tu <br></br>
         experiencia sea única y sin complicaciones. </p>
 
       <div style={carouselContainerStyle}>
-        <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+        <div id="carouselExampleCaptions" className="fade-up carousel slide" data-ride="carousel">
           <div className="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
