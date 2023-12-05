@@ -39,7 +39,7 @@ export const Signup = () => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
-    fontFamily: 'Unbounded, sans-serif',
+    fontFamily: 'Raleway, sans-serif',
     fontSize:'13px'
   };
 

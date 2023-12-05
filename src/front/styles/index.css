@@ -1,13 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+
+ @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@700&display=swap');
+
+
  
 
 .navbar-nav .nav-link {
   margin-right: 80px;
+  font-size: 20px;
 }
 
 .nav-link{
   position: relative;
-  font-family: 'Unbounded', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .nav-link::after{
@@ -31,7 +37,8 @@
   background-image: linear-gradient(131deg, #202933, #69312c, #ac2f23, #c22626);
   background-size: 300% 100%;
   animation: moveBackground1 15s linear infinite;
-  color: #fff
+  color: #ffff;
+  font-family: 'Raleway', sans-serif;
 }
 
 @keyframes moveBackground1 {
@@ -98,37 +105,56 @@
 }
 
 .donations-area {
-  font-size: 1.5rem; /* Ajusta el tamaño del texto según tus necesidades */
+  font-size: 1.5rem; 
 }
 
 .donations-area h1 {
-  font-size: 3rem; /* Tamaño del h1 */
+  font-size: 3rem; 
 }
 
 .donations-area h5 {
-  font-size: 2rem; /* Tamaño del h5 */
+  font-size: 2rem; 
 }
 
 .donations-area button {
-  font-size: 2rem; /* Tamaño del botón */
+  font-size: 2rem; 
 }
 
-.background-container {
-  background: linear-gradient(to right, #1f618d, #27ae60, #d4ac0d);
-  background-size: 300% 100%;
-  animation: moveBackground2 15s linear infinite;
+.fade-down {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeDown 3s forwards;
 }
 
-@keyframes moveBackground2 {
-  0% {
-    background-position: 0 50%;
+@keyframes fadeDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  50% {
-    background-position: 100% 50%;
+.fade-left {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: fadeLeft 3s forwards;
+}
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
 
-  100% {
-    background-position: 0 50%;
+.fade-right {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeRight 3s forwards;
+}
+
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

@@ -36,7 +36,7 @@ export const About = () => {
         estamos aquí para inspirarte y facilitar tus aventuras. <br></br>
         Descubre el mundo con RGGN!</p>
 
-      <h1 className="d-flex justify-content-end me-5 pe-5">QUIENES SOMOS?</h1>
+      <h1 className="d-flex justify-content-end pe-5 me-5">QUIENES SOMOS?</h1>
       <p className="d-flex justify-content-end me-3 pe-5"> Somos un equipo pequeño con un gran propósito.<br></br>
         Te ayudamos a descubrir tu destino perfecto. <br></br>
         Simplificamos el proceso para que tu <br></br>

@@ -4,12 +4,12 @@ import { faPlaneDeparture, faPlaneArrival, faUser, faUsers, faBriefcase, faBrief
 
 
 const estiloFondo = {
-  background: 'linear-gradient(to bottom, grey, blue)',
+  background: 'linear-gradient(to bottom, black, blue)',
   height: '100vh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }
 
 export const Services = () => {
@@ -18,14 +18,14 @@ export const Services = () => {
   const [isHovered3, setIsHovered3] = useState(false);
 
   return (
-    <div style={estiloFondo} className="d-flex flex-column align-items-center justify-content-center">
-    <h2 className='my-5'>Explora tu Mundo Interior</h2>
-    <h4 className='mb-5'>Únete a la comunidad, comparte experiencias</h4>
+    <div style={estiloFondo} className="d-flex flex-column align-items-center justify-content-center text-white">
+    <h1 className='animated-text mb-5 pb-3'>Explora tu Mundo Interior</h1>
+    <h4 className='mb-5 pb-5 fade-up'>Únete a la comunidad, comparte experiencias</h4>
 
     <div className="row">
       <div className="col-md-4 pe-3">
         <div
-          className="card bg-dark text-white rounded-5"
+          className="fade-right card bg-dark text-white rounded-5"
           onMouseEnter={() => setIsHovered1(true)}
           onMouseLeave={() => setIsHovered1(false)}
         >
@@ -43,7 +43,7 @@ export const Services = () => {
 
       <div className="col-md-4 pe-3">
         <div
-          className="card bg-dark text-white rounded-5"
+          className="fade-up card bg-dark text-white rounded-5"
           onMouseEnter={() => setIsHovered2(true)}
           onMouseLeave={() => setIsHovered2(false)}
         >
@@ -61,7 +61,7 @@ export const Services = () => {
 
       <div className="col-md-4 pe-3">
         <div
-          className="card bg-dark text-white rounded-5"
+          className="fade-left card bg-dark text-white rounded-5"
           onMouseEnter={() => setIsHovered3(true)}
           onMouseLeave={() => setIsHovered3(false)}
         >
