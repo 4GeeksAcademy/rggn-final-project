@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Countries, Posts, Tags
+from api.models import db, User, Countries, Posts, Tags, Post_Tag, Post_Category
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -98,6 +98,26 @@ def handle_signup():
     db.session.commit()
     return jsonify({'msg': 'User created succesfully'}), 200
 
+# @api.route('/posts', methods=['GET'])
+# def get_all_posts():
+#     posts = db.session.query(Posts, Tags).join(Tags).all()
+#     result = list(map(lambda post:{
+#         # Post
+#         "idPost": post[0].id,
+#         "img": post[0].img,
+#         "comment": post[0].comment,
+#         "date": post[0].date,
+#         "categories": post[0].categories,
+#         "user": post[0].user,        # Tags
+#         "idTag": post[1].id,
+#         "tagName": post[1].name,
+#     }, posts)) 
+
+#     return jsonify(result), 200
+
+
+
+
 @api.route('/posts', methods=['GET'])
 def get_all_posts():
     posts = Posts.query.all()
@@ -109,6 +129,8 @@ def get_all_posts():
     # result = list(map(lambda post:{
     #     "idPost": post[0].id,
     #     "idTag": post[1].id,
+
+    
 
     # }))
     # return jsonify(result), 200

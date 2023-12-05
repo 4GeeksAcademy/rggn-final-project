@@ -18,11 +18,12 @@ export const Home = () => {
         position: 'relative',
         backgroundColor: 'transparent',
         color: 'white',
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         fontFamily: 'Unbounded, sans-serif',
+        marginTop:'15vh',
+        marginRight:'4vh'
     };
 
     const HomeStyle = {
@@ -37,53 +38,27 @@ export const Home = () => {
 
     return (
         <div style={HomeStyle}>
-             <nav className="navbar navbar-expand-lg fixed-top">
-                <div className="container-fluid ps-5">
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 p-2">
-                            <li className="nav-item">
-                                <Link className="nav-link active custom-margin" to="/">Inicio</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active custom-margin" to="/">Servicios</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active custom-margin" to="/about">Sobre Nosotros</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active custom-margin" to="/">Contacto</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
             <div className="container-fluid position-relative">
                 <img
                     src={logoImage}
                     alt="Logotipo"
-                    className="img-fluid position-absolute top-0 mt-3"
+                    className="fade-up img-fluid position-absolute top-0 mt-3"
                     style={{ maxWidth: '300px', left: '10px' }}
                 />
             </div>
             <div className="container">
                 <div className="" style={cardStyle}>
-                    <div className="card-body mt-5 pt-5">
-                        <h1 className="text-center mb-4">
+                    <div className="card-body">
+                        <h1 className="text-center fade-down">
                             DESCUBRE <br /> EXPLORA <br /> VIVE
                         </h1>
-                        <p className="text-center mb-4">
+                        <p className="text-center fade-left">
                             Bienvenido a nuestra comunidad de viajeros y aventureros.
                             <br /> En nuestro sitio, te ofrecemos la oportunidad de
                             <br />descubrir destinos emocionantes,
                             <br /> explorar nuevas culturas y vivir experiencias inolvidables.
                             <br /> Únete a nosotros mientras exploramos el mundo juntos!
                         </p>
-                    </div>
-                    <div className="card-footer">
-                        <div className="d-flex flex-column justify-content-between mb-5">
-                            <Link to="/signup" className="btn btn-dark mb-3 text-warning">Registrarse</Link>
-                            <Link to="/login" className="btn btn-dark mb-3 text-warning">Iniciar sesión</Link>
-                        </div>
                     </div>
                 </div>
             </div>

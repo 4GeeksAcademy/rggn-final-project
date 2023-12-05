@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
@@ -9,16 +10,24 @@
     overflow-y: scroll;
 }
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+=======
+
+ @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@700&display=swap');
+
+>>>>>>> 32256677842c1f5b0461063760ea844a713e36e5
 
  
 
 .navbar-nav .nav-link {
   margin-right: 80px;
-  font-family: 'Unbounded', sans-serif;
+  font-size: 20px;
 }
 
 .nav-link{
   position: relative;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .nav-link::after{
@@ -26,13 +35,140 @@
   transition: all 0.2s;
   height: 2px;
   width: 100%;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   position: absolute;
   bottom: 0;
   left: 0;
   content:'';
+
 }
 
 .nav-link:hover::after {
   opacity: 1;
+}
+
+.donations-area {
+  background-image: linear-gradient(131deg, #202933, #69312c, #ac2f23, #c22626);
+  background-size: 300% 100%;
+  animation: moveBackground1 15s linear infinite;
+  color: #ffff;
+  font-family: 'Raleway', sans-serif;
+}
+
+@keyframes moveBackground1 {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.animated-text {
+  display: inline-block;
+  white-space: nowrap;
+  border-right: 4px solid;
+  width: 0;
+  overflow: hidden;
+  animation: typing 2s steps(15) forwards, blink 0.5s infinite step-end alternate;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 15ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.animated-btn {
+  animation: shaking 2s infinite;
+}
+
+@keyframes shaking {
+  10%, 30% {
+    transform: translateX(-2px) rotate(5deg);
+  }
+
+  20% {
+    transform: translateX(2px) rotate(-5deg);
+  }
+
+  40% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 3s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.donations-area {
+  font-size: 1.5rem; 
+}
+
+.donations-area h1 {
+  font-size: 3rem; 
+}
+
+.donations-area h5 {
+  font-size: 2rem; 
+}
+
+.donations-area button {
+  font-size: 2rem; 
+}
+
+.fade-down {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeDown 3s forwards;
+}
+
+@keyframes fadeDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: fadeLeft 3s forwards;
+}
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeRight 3s forwards;
+}
+
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
