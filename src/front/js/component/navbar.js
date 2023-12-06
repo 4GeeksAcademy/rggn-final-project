@@ -47,7 +47,7 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link active custom-margin" to="/">
+							<Link className="nav-link active custom-margin" to="/contact">
 								Contacto
 							</Link>
 						</li>
