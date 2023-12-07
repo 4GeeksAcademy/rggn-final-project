@@ -39,6 +39,9 @@ const CreatePost = () => {
 
     }
 
+    const countries = ["Venezuela", "Argentina", "Ecuador"]
+    const cities = ["Maracaibo", "Buenos Aires", "Quito"]
+
     return (
         <>
             <div className="container">
@@ -69,21 +72,36 @@ const CreatePost = () => {
 
                     <br></br>
 
-                    <select class="form-select" aria-label="Default select example" name="country">
-                        <option selected>Escoge el país</option>
-                        <option value="Venezuela">Venezuela</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Ecuador">Ecuador</option>
-                    </select>
+                    <div className="mb-3">
+                        <label htmlFor="country" className="form-label">Pais:</label>
+                        <select
+                            className="form-select"
+                            name="country"
+                            onChange={handleChange}
+                            value={post.country}
+                        >
+                            <option value="">Select country</option>
+                            {countries.map((countries, index) => {
+                                return (<option key={index} value={countries}>{countries}</option>)
+                            })}
+                        </select>
+                    </div>
 
                     <br></br>
 
-                    <select class="form-select" aria-label="Default select example" name="city">
-                        <option selected>Escoge la ciudad</option>
-                        <option value="Maracaibo">Maracaibo</option>
-                        <option value="Buenos Aires">Buenos Aires</option>
-                        <option value="Quito">Quito</option>
-                    </select>
+                    <div className="mb-3">
+                        <label htmlFor="country" className="form-label">Ciudad:</label>
+                        <select
+                            className="form-select"
+                            name="city"
+                            onChange={handleChange}
+                        >
+                            <option value="">Select city</option>
+                            {cities.map((cities, index) => {
+                                return (<option key={index} value={cities}>{cities}</option>)
+                            })}
+                        </select>
+                    </div>
 
                     <br></br>
 
