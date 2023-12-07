@@ -60,10 +60,10 @@ export const Navbar = () => {
 						{store.token == null ? (
 							<>
 								<Link to="/signup">
-									<button className="btn btn-warning bg-dark text-warning me-4">Register</button>
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">Register</button>
 								</Link>
 								<Link to="/login">
-									<button className="btn btn-warning bg-dark text-warning mx-2">Login</button>
+									<button className="btn btn-info bg-dark text-info mt-1 me-4">Login</button>
 								</Link>
 							</>
 						) : <button className="btn btn-danger mx-2" onClick={handleLogout}>logOut</button>}
