@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 
-			token: sessionStorage.getItem("token") || null
+			token: sessionStorage.getItem("token") || null,
+			user: sessionStorage.getItem("user_id") || null
 
 		},
 		actions: {
@@ -54,9 +55,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						let result = await response.json()
 						console.log(result)
 						setStore({
-							token: result.token
+							token: result.token,
+							user_id: result.user_id
 						})
 						localStorage.setItem("token", result.token)
+				
 					}
 					return response.status
 
@@ -64,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
+		
 
 		signup: async (name, email, password, countries) => {
 			const { apiFetch } = getActions()

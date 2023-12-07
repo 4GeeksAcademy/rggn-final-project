@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
+import CreatePost from "./pages/CreatePost.jsx"
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -17,6 +18,7 @@ import { About } from "./component/about.jsx";
 import { Login } from "./component/login.jsx";
 import { Signup } from "./component/signup.jsx";
 
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -29,7 +31,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar /> 
+                    <Navbar />
 
                     <Routes>
                         <Route element={<Login />} path="/login" />
@@ -37,6 +39,7 @@ const Layout = () => {
                         <Route element={<Services />} path="/services" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Donations />} path="/donations" />
+                        <Route element={<CreatePost />} path="/createPost" />
                         <Route element={<Home />} path="/" />
                     </Routes>
 
