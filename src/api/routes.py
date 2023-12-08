@@ -6,6 +6,7 @@ from api.models import db, User, Countries, Posts, Tags, Post_Tag, Post_Category
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
+import cloudinary.uploader as uploader
 
 api = Blueprint('api', __name__)
 
