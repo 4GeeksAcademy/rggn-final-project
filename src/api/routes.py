@@ -139,6 +139,32 @@ def get_all_posts():
 
 @api.route('/posts', methods=['POST'])
 def save_post(): 
-    body_form = request.form
-    body_files = request.files
+    data_form = request.form
+    data_file = request.files
+    data = {
+        "title":data_form.get("title"),
+        "img": data_file.get("img"),
+        "comment": data_form.get("comment"),
+        "date":data_form.get("date"),
+        "user_id": data_form.get("user_id"),
+        "post_category": data_form.get("post_category"),
+        "post_tag": data_form.get("post_tag"),
+    }
     
+    post = Posts(
+        title=data.get("title"), 
+        img=data.get("img"),
+        comment=data.get("comment"),
+        date=data.get("date"),
+        user_id=data.get("user_id"),
+        post_category=data.get("post_category"),
+        post_tag=data.get("post_tag")
+        )
+    db.session.add(post)
+
+    try:
+        db.session.commit()
+        return jsonify({"message":"post created succesfully"}),201
+    except Exception as error:
+        print(error)
+        return jsonify({"message":"error creating post"}), 500
