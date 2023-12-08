@@ -217,3 +217,47 @@
     transform: translateX(0);
   }
 }
+
+.post-container {
+  background-image: linear-gradient(131deg, #157ba3, rgb(110, 146, 245), rgb(255, 255, 255));
+  background-size: 300% 100%;
+  animation: gradientAnimation 15s linear infinite;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.left-container {
+  margin-right: 280px
+}
+
+.left-container {
+  
+    opacity: 0;
+    transform: translateX(200px);
+    animation: leftContainer 2s forwards;
+}
+  
+  @keyframes leftContainer {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .txt-big {
+    font-size: 1.3em; 
+  }
