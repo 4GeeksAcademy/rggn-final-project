@@ -7,12 +7,53 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
 import cloudinary.uploader as uploader
+from werkzeug.security import generate_password_hash, check_password_hash
+from base64 import b64encode
+import os
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
 
+#salt
+def set_password(password, salt):
+    return generate_password_hash(f"{password}{salt}")
+#hash
+def check_password(hash_password, password, salt):
+    return check_password_hash(hash_password, f"{password}{salt}")
+
+# @api.route('/hello', methods=['POST'])
+# def handle_hello():
+
+#     response_body = {
+#         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+#     }
+
+#     return jsonify(response_body), 200
+@api.route('/login', methods=['POST'])
+def handle_login():
+    body = request.json
+    email = body.get("email")
+    password = body.get("password")
+
+    if email is None or password is None:
+        return jsonify({"message":"You need email and password"}), 400
+    else: 
+        user = User.query.filter_by(email = email).one_or_none()
+        if user is None:
+            return jsonify({"message":"bad credentials"}), 400
+        else:
+            if check_password(user.password, password, user.salt):
+                token = create_access_token(
+                    identity = {
+                        "user_id":user.id,
+                    }
+                )
+                return jsonify({"token":token}), 200
+            else:
+                return jsonify({"message":"bad credentials"}), 400
 @api.route('/user', methods=['GET'])
 def get_all_users():
     users = User.query.all()
@@ -23,7 +64,8 @@ def get_all_users():
 
 @api.route('/signup', methods=['POST'])
 def handle_signup():
-    body = json.loads(request.data)
+    body = request.json
+    password = body.get('password')
     # Verificar si el correo electronico ya existe
     exist_user = User.query.filter_by(email = body['email']).first()
     if exist_user: 
@@ -42,11 +84,15 @@ def handle_signup():
     else:
         # Manejar el caso donde no se proporciona el país
         countries = None
+
+    salt = b64encode(os.urandom(32)).decode("utf-8")
+    password = set_password(password, salt)
         
     new_user = User(
         email = body['email'],
         name = body['name'],
-        password = body['password'],
+        password = password,
+        salt = salt,
         countries = countries,
     )
 
@@ -90,3 +136,9 @@ def get_all_posts():
 
     # }))
     # return jsonify(result), 200
+
+@api.route('/posts', methods=['POST'])
+def save_post(): 
+    body_form = request.form
+    body_files = request.files
+    
