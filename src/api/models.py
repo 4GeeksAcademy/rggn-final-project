@@ -46,7 +46,7 @@ class Countries(db.Model):
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
-    post_category = db.relationship("Post_Category", backref= db.backref("categories"))
+    # post_category = db.relationship("Post_Category", backref= db.backref("categories"))
     
     def __repr__(self):
         return f'<Categories {self.name}>'
@@ -61,7 +61,7 @@ class Categories(db.Model):
 class Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    post_tag = db.relationship("Post_Tag", backref= db.backref("tags"))
+    post_tag = db.relationship("Post_Tag", backref="tags")
 
     def __repr__(self):
         return f'<Tags {self.name}>'
@@ -80,8 +80,9 @@ class Posts(db.Model):
     comment = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    post_category = db.relationship("Post_Category", backref= db.backref("posts"))
-    post_tag = db.relationship("Post_Tag", backref= db.backref("posts"))
+    post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    # post_category = db.relationship("Post_Category", backref= db.backref("posts"))
+    post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
 
 
 
@@ -105,25 +106,25 @@ class Posts(db.Model):
             "user_id": self.user_id
         }
     
-class Post_Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
-    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
+# class Post_Category(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
+#     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
     
 
 
 
-    def __repr__(self):
-        return f'<Post_Category {self.id}>'
+#     def __repr__(self):
+#         return f'<Post_Category {self.id}>'
 
-    def serialize(self):
-        category = Categories.query.get(self.category_id)
-        return {
-            "id": self.id,
-            "category": category.serialize()["name"],
-            "post_id": self.post_id,
+#     def serialize(self):
+#         category = Categories.query.get(self.category_id)
+#         return {
+#             "id": self.id,
+#             "category": category.serialize()["name"],
+#             "post_id": self.post_id,
  
-        }
+#         }
 
 class Post_Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)

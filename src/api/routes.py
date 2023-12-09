@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Countries, Posts, Tags, Post_Tag, Post_Category
+from api.models import db, User, Countries, Posts, Tags, Post_Tag
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
@@ -138,17 +138,20 @@ def get_all_posts():
     # return jsonify(result), 200
 
 @api.route('/posts', methods=['POST'])
+@jwt_required()
 def save_post(): 
+    uid = get_jwt_identity()["user_id"]
+   
     data_form = request.form
     data_file = request.files
     data = {
         "title":data_form.get("title"),
-        "img": data_file.get("img"),
+        "img": 'data_file.get("img")',
         "comment": data_form.get("comment"),
         "date":data_form.get("date"),
-        "user_id": data_form.get("user_id"),
+        "user_id": uid,
         "post_category": data_form.get("post_category"),
-        "post_tag": data_form.get("post_tag"),
+        # "post_tag": data_form.get("post_tag"),
     }
     
     post = Posts(
@@ -156,9 +159,9 @@ def save_post():
         img=data.get("img"),
         comment=data.get("comment"),
         date=data.get("date"),
-        user_id=data.get("user_id"),
-        post_category=data.get("post_category"),
-        post_tag=data.get("post_tag")
+        user_id= uid,
+        # post_category=data.get("post_category"),
+        # post_tag=data.get("post_tag")
         )
     db.session.add(post)
 
