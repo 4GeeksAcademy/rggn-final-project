@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
 import {Context} from "../store/appContext.js";
 import backgroundImage from '../../img/backgroundsignup.jpg';
+import { Link, useNavigate } from "react-router-dom"
 
 export const Signup = () => {
 
   const { store, actions } = useContext(Context)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -30,8 +32,11 @@ export const Signup = () => {
 
   const signupClick = async (e) => {
     // e.preventDefault()
-    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)
+    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)    
     console.log(respuesta)
+    // if (respuesta == respuesta) {
+        navigate("/postviews")
+    // }
   }
 
   const backgroundStyle = {
@@ -120,11 +125,8 @@ export const Signup = () => {
                 </div>
 
                 <div className="mb-3">
-<<<<<<< HEAD
-                  <a onClick={signupClick} className="btn btn-primary w-100" href="/postviews">Registrarse</a>
-=======
-                  <button onClick={signupClick} className="btn btn-primary w-100">Registrarme</button>
->>>>>>> 32256677842c1f5b0461063760ea844a713e36e5
+                  <button onClick={signupClick} className="btn btn-primary w-100" >Registrarse</button>                  
+
                 </div>
               </form>
             </div>

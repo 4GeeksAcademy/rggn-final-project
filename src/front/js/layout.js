@@ -16,7 +16,7 @@ import { Services } from "./component/services.jsx";
 import { About } from "./component/about.jsx";
 import { Login } from "./component/login.jsx";
 import { Signup } from "./component/signup.jsx";
-import { PostViews } from "./component/postsViews.jsx"
+import { PostViews } from "./pages/postsViews.jsx"
 
 //create your first component
 const Layout = () => {
@@ -35,11 +35,8 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Login />} path="/login" />
                         <Route element={<Signup />} path="/signup" />
-<<<<<<< HEAD
                         <Route element={<PostViews />} path="/postviews" />
-=======
                         <Route element={<Services />} path="/services" />
->>>>>>> 32256677842c1f5b0461063760ea844a713e36e5
                         <Route element={<About />} path="/about" />
                         <Route element={<Donations />} path="/donations" />
                         <Route element={<Home />} path="/" />

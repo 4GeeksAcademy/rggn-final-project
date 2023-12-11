@@ -1,6 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 
 export const PostViews = () => {
+
+    const [post, setPost] = useState({
+        img: "img"
+    });
+
+    const postsChange = (event) => {
+        setPost({ [event.target.img]: event.target.value });
+      };
 
     return (
         <>
