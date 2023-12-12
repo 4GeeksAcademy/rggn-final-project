@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import {Context} from "../store/appContext.js";
+import { Context } from "../store/appContext.js";
 import backgroundImage from '../../img/backgroundsignup.jpg';
 import { Link, useNavigate } from "react-router-dom"
 
@@ -28,15 +28,38 @@ export const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Formulario enviado:', formData);
+
   };
 
   const signupClick = async (e) => {
-    // e.preventDefault()
-    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)    
-    console.log(respuesta)
-    if (respuesta.msg == "ok") {
+
+    e.preventDefault()
+    try {
+      const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries);
+      console.log(respuesta);
+      Swal.fire({
+        title: '¡Registro exitoso!',
+        text: 'Bienvenido a nuestra comunidad.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      if (respuesta.msg == "ok") {
         navigate("/postviews")
-    } //else {alert(respuesta.msg)}
+    }
+
+    } catch (error) {
+      console.error("Error al realizar el registro:", error);
+
+
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+
   }
 
   const backgroundStyle = {
@@ -45,7 +68,7 @@ export const Signup = () => {
     backgroundPosition: 'center',
     height: '100vh',
     fontFamily: 'Raleway, sans-serif',
-    fontSize:'13px'
+    fontSize: '13px'
   };
 
   const countries = ["Venezuela", "Argentina", "Ecuador"]

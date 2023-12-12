@@ -132,18 +132,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return elm;
 				});
 
+
 				//reset the global store
 				setStore({ demo: demo });
 			},
+
+			addPost: async (post) => {
+				let store = getStore();
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						method: "POST",
+						body: post
+					}
+					)
+					const data = await response.json()
+					console.log(data)
+					if (response.ok) {
+						return true
+					} else {
+						return false
+					}
+	
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			getMessage: async () => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const data = await resp.json()
+					setStore({ message: data.message })
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+	
+				}
+			},
+			
 			getAllPosts: async() => {
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
 					return response
 				} 
 				return false
-			}
-		}
 	};
+	
 };
 
 export default getState;
