@@ -127,15 +127,7 @@ def get_all_posts():
         return jsonify({"msg": "not found"}), 404
     serialized_posts = list(map(lambda x: x.serialize(), posts))
     return jsonify (serialized_posts), 200 
-    # posts = db.session.query(Posts, Tags).join(Tags).all()
-    # result = list(map(lambda post:{
-    #     "idPost": post[0].id,
-    #     "idTag": post[1].id,
 
-    
-
-    # }))
-    # return jsonify(result), 200
 
 @api.route('/posts', methods=['POST'])
 @jwt_required()
@@ -160,8 +152,7 @@ def save_post():
         comment=data.get("comment"),
         date=data.get("date"),
         user_id= uid,
-        # post_category=data.get("post_category"),
-        # post_tag=data.get("post_tag")
+       
         )
     db.session.add(post)
 
@@ -171,3 +162,13 @@ def save_post():
     except Exception as error:
         print(error)
         return jsonify({"message":"error creating post"}), 500
+
+@api.route('/posts/countries', methods=['GET'])
+def get_all_posts_by_country():
+    body = json.loads(request.data)
+    country = body["country"]
+    posts = Posts.query.filter_by(countries_id = country).all()
+    if len(posts) < 1:
+        return jsonify({"msg": "not found"}), 404
+    serialized_posts = list(map(lambda x: x.serialize(), posts))
+    return jsonify (serialized_posts), 200 
