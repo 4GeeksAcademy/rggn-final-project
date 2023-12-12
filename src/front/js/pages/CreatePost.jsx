@@ -47,7 +47,7 @@ const CreatePost = () => {
             <div className="post-container d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
                 <div className="container mt-5 pt-5">
                     <div className="row justify-content-center">
-                        <div className="col-md-6 col-lg-4 left-container">
+                        <div className="col-md-5 col-lg-4 left-container">
                             <div className="card p-2 bg-dark text-white">
                                 <h1 className="h4 text-center mb-3">Crear publicacion</h1>
                                 <form className="container" style={{ width: "100%" }} onSubmit={handlePost}>

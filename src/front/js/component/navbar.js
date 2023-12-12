@@ -59,6 +59,9 @@ export const Navbar = () => {
 						</li>
 						{store.token == null ? (
 							<>
+							    <Link to="/createPost">
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">Create Post</button>
+								</Link>
 								<Link to="/signup">
 									<button className="btn btn-info bg-dark text-info me-4 mt-1">Register</button>
 								</Link>
