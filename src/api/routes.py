@@ -163,12 +163,12 @@ def save_post():
         print(error)
         return jsonify({"message":"error creating post"}), 500
 
-@api.route('/posts/countries', methods=['GET'])
-def get_all_posts_by_country():
-    body = json.loads(request.data)
-    country = body["country"]
-    posts = Posts.query.filter_by(countries_id = country).all()
-    if len(posts) < 1:
-        return jsonify({"msg": "not found"}), 404
-    serialized_posts = list(map(lambda x: x.serialize(), posts))
-    return jsonify (serialized_posts), 200 
+# @api.route('/posts/countries', methods=['GET'])
+# def get_all_posts_by_country():
+#     body = json.loads(request.data)
+#     country = body["country"]
+#     posts = Posts.query.filter_by(countries_id = country).all()
+#     if len(posts) < 1:
+#         return jsonify({"msg": "not found"}), 404
+#     serialized_posts = list(map(lambda x: x.serialize(), posts))
+#     return jsonify (serialized_posts), 200 
