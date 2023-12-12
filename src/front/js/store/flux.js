@@ -21,9 +21,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
 
 			apiFetch: async (route, method = "GET", body = null) => {
 
@@ -171,15 +168,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 	
 				}
 			},
-			
+
 			getAllPosts: async() => {
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
 					return response
 				} 
 				return false
-	};
+	}
 	
-};
+}}}
 
 export default getState;
