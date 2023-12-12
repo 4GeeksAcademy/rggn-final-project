@@ -35,14 +35,14 @@ export const Login = () => {
           confirmButtonText: 'Cool'
       });
   } else if (result === 200) {
-      alert("Bienvenido usuario");
+      // alert("Bienvenido usuario");
       // navigate(posts)
       Swal.fire({
-          title: 'Error!',
-          text: `Error inesperado: ${result}`,
-          icon: 'success',
-          confirmButtonText: 'Cool'
-      });
+        title: 'Bienvenido!',
+        text: ` Gusto verte viajero!${result}`,
+        icon: 'success',
+        confirmButtonText: 'Entendido'
+    });
   } 
   };
 
