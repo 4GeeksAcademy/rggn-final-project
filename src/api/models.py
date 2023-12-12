@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -78,7 +79,7 @@ class Posts(db.Model):
     img = db.Column(db.String(300), nullable=False)
     title = db.Column(db.String(150), nullable=False)
     comment = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default= date.today())
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))
     # post_category = db.relationship("Post_Category", backref= db.backref("posts"))

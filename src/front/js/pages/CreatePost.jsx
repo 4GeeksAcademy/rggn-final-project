@@ -2,21 +2,22 @@ import React, { useState, useContext, useEffect } from "react"
 import { Context } from "../store/appContext"
 import { Navigate, useNavigate } from "react-router-dom"
 
+const initialState = {
+    img: "",
+    title: "",
+    comment: "",
+    date: new Date(),
+    country: "",
+    post_category: 0,
+    city: ""
+}
+
 const CreatePost = () => {
     const navigate = useNavigate()
-    const { store, actions } = useContext(Context)
+    const { actions } = useContext(Context)
 
-    const [post, setPost] = useState(
-        {
-            img: "",
-            title: "",
-            comment: "",
-            date: new Date(),
-            country: "",
-            post_category: "",
-            city: ""
-        }
-    )
+
+    const [post, setPost] = useState(initialState)
 
 
     const handleChange = (event) => {
@@ -30,7 +31,18 @@ const CreatePost = () => {
 
     const handlePost = async (event) => {
         event.preventDefault()
-        let response = await actions.addPost(post)
+
+        const formData = new FormData()
+        formData.append("img", post.img)
+        formData.append("title", post.title)
+        formData.append("comment", post.comment)
+        formData.append("date", post.date)
+        formData.append("country", post.country)
+        formData.append("post_category", post.post_category)
+        formData.append("city", post.city)
+
+
+        let response = await actions.addPost(formData)
         console.log(post)
         if (response) {
             navigate("/posts")
@@ -60,7 +72,7 @@ const CreatePost = () => {
                                             name="title"
                                             value={post.title}
                                             onChange={handleChange}
-                                            // {/* date buscar funcion de date */ }
+                                        // {/* date buscar funcion de date */ }
                                         />
                                     </div>
 
@@ -113,7 +125,8 @@ const CreatePost = () => {
                                                 type="radio"
                                                 name="post_category"
                                                 id="flexRadioDefault1"
-                                                value="destino"
+                                                value={1}
+                                                onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault1">Destino</label>
                                         </div>
@@ -123,7 +136,8 @@ const CreatePost = () => {
                                                 type="radio"
                                                 name="post_category"
                                                 id="flexRadioDefault2"
-                                                value="gastronomia"
+                                                value={2}
+                                                onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault2">Gastronomía</label>
                                         </div>
@@ -133,7 +147,8 @@ const CreatePost = () => {
                                                 type="radio"
                                                 name="post_category"
                                                 id="flexRadioDefault3"
-                                                value="actividad"
+                                                value={3}
+                                                onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault3">Actividad</label>
                                         </div>
@@ -158,9 +173,9 @@ const CreatePost = () => {
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-4 text-center pe-5 me-5 d-flex flex-column justify-content-center text-dark txt-big">
-                <h1 className="fade-right">Comparte contenido</h1>
-                <h5 className="fade-right">Crea una publicacion sobre tu aventura!</h5>
-            </div>
+                            <h1 className="fade-right">Comparte contenido</h1>
+                            <h5 className="fade-right">Crea una publicacion sobre tu aventura!</h5>
+                        </div>
                     </div>
                 </div>
             </div>
