@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneDeparture, faPlaneArrival, faUser, faUsers, faBriefcase, faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
+import arg from '../../img/arg.jpg';
+import arg2 from '../../img/arg2.jpg';
+import ecua2 from '../../img/ecua2.jpg';
+import chile from '../../img/chile.jpg';
+import brasil from '../../img/brasil.jpg';
 
 
 const estiloFondo = {
   background: 'linear-gradient(to bottom, black, blue)',
-  height: '100vh',
+  height: '180vh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -78,6 +83,14 @@ export const Services = () => {
       </div>
 
     </div>
+    <h1 className="text-center mt-5 pt-5">Nuestros destinos disponibles!</h1>
+    <section className="mt-5">
+      <img src={arg} alt="" />
+      <img src={arg2} alt="" />
+      <img src={ecua2} alt="" />
+      <img src={chile} alt="" />
+      <img src={brasil} alt="" />
+    </section>
   </div>
 );
 }

@@ -30,8 +30,28 @@ export const Signup = () => {
 
   const signupClick = async (e) => {
     e.preventDefault()
-    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)
-    console.log(respuesta)
+    try {
+      const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries);
+      console.log(respuesta);
+    Swal.fire({
+      title: '¡Registro exitoso!',
+      text: 'Bienvenido a nuestra comunidad.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+
+    
+  } catch (error) {
+    console.error("Error al realizar el registro:", error);
+
+    
+    Swal.fire({
+      title: 'Error',
+      text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
   }
 
   const backgroundStyle = {

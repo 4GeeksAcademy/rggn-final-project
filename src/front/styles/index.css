@@ -261,3 +261,23 @@
   .txt-big {
     font-size: 1.3em; 
   }
+ 
+section {
+  display: flex;
+  width: 70%;
+  height: 500px;
+}
+
+section img {
+  width: 0px;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: .8;
+  transition: .5s ease;
+}
+
+section img:hover {
+  width: 300px;
+  opacity: 1;
+  filter: contrast(120%);
+}
