@@ -21,16 +21,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
 
 			apiFetch: async (route, method = "GET", body = null) => {
 
 				let parametros = { method }
 				if (body) {
 					parametros.body = JSON.stringify(body)
-					let headers = { "Content-Type": "application/json" }
+					let headers = { "Content-Type": "application/json", 'Access-Control-Allow-Origin': "*" }
 					parametros.headers = headers
 				}
 
@@ -69,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+
 			signup: async (name, email, password, countries) => {
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
@@ -105,6 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: null
 				})
 			},
+
 
 
 			addPost: async (post) => {
@@ -160,5 +159,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		}
 	};
 };
+
 
 export default getState;
