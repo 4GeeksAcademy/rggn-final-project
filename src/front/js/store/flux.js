@@ -106,6 +106,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			})
 		},
 
+		
+		addPost: async (post) => {
+			let store = getStore();
+			try {
+				let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+					method: "POST",
+					body: post
+				}
+				)
+				const data = await response.json()
+				console.log(data)
+				if (response.ok) {
+					return true
+				} else {
+					return false
+				}
+
+			} catch (error) {
+				console.log(error)
+			}
+		},
+
 		getMessage: async () => {
 			try {
 				// fetching data from the backend
