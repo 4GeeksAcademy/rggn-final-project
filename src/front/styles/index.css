@@ -220,7 +220,7 @@
 
 .post-container {
   background-image: linear-gradient(131deg, #157ba3, rgb(110, 146, 245), rgb(255, 255, 255));
-  background-size: 300% 100%;
+  background-size: 200% 100%;
   animation: gradientAnimation 15s linear infinite;
   color: #ffffff;
   font-family: 'Raleway', sans-serif;
