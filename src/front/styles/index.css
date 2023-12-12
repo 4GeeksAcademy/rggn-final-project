@@ -1,7 +1,21 @@
 
+/* 
+    General Styles used on every website (Don't Repeat Yourself)
+*/
+.my-card{
+    width: 18rem;
+}
+
+.my-posts{
+    overflow-y: scroll;
+}
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+
+
  @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@700&display=swap');
+
 
 
  
@@ -220,7 +234,7 @@
 
 .post-container {
   background-image: linear-gradient(131deg, #157ba3, rgb(110, 146, 245), rgb(255, 255, 255));
-  background-size: 300% 100%;
+  background-size: 200% 100%;
   animation: gradientAnimation 15s linear infinite;
   color: #ffffff;
   font-family: 'Raleway', sans-serif;
