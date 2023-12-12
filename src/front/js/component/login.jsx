@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import backgroundImage from '../../img/background.jpg';
+import backgroundsignup from '../../img/backgroundsignup.jpg';
 import { Context } from "../store/appContext";
 import {Navigate, useNavigate} from "react-router-dom"
 import Swal from 'sweetalert2'
@@ -47,7 +47,7 @@ export const Login = () => {
   };
 
   const backgroundStyle = {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${backgroundsignup})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     fontFamily: 'Raleway, sans-serif',

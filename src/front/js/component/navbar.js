@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
-
+import  RggnIcon  from "../../img/rggn.png";
 
 
 
@@ -14,10 +14,11 @@ export const Navbar = () => {
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-			<div className="container-fluid ps-5">
-				<Link className="navbar-brand" to="/">
-					RGGN
-				</Link>
+			<div className="container-fluid position-relative ps-5">
+			<Link className="navbar-brand p-0 m-0" to="/">
+                    <img src={ RggnIcon }
+					style={{ width: '48px', height: '48px'}}/>
+                </Link>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -47,7 +48,7 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link active custom-margin" to="/">
+							<Link className="nav-link active custom-margin" to="/contact">
 								Contacto
 							</Link>
 						</li>
@@ -59,10 +60,10 @@ export const Navbar = () => {
 						{store.token == null ? (
 							<>
 								<Link to="/signup">
-									<button className="btn btn-warning bg-dark text-warning me-4">Register</button>
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">Register</button>
 								</Link>
 								<Link to="/login">
-									<button className="btn btn-warning bg-dark text-warning mx-2">Login</button>
+									<button className="btn btn-info bg-dark text-info mt-1 me-4">Login</button>
 								</Link>
 							</>
 						) : <button className="btn btn-danger mx-2" onClick={handleLogout}>logOut</button>}

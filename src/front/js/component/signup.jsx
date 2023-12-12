@@ -34,9 +34,9 @@ export const Signup = () => {
     // e.preventDefault()
     const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)    
     console.log(respuesta)
-    // if (respuesta == respuesta) {
+    if (respuesta.msg == "ok") {
         navigate("/postviews")
-    // }
+    } //else {alert(respuesta.msg)}
   }
 
   const backgroundStyle = {

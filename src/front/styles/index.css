@@ -55,7 +55,7 @@
   font-family: 'Raleway', sans-serif;
 }
 
-@keyframes moveBackground1 {
+@keyframes moveBackground {
   0% {
     background-position: 0 50%;
   }
@@ -172,3 +172,106 @@
     transform: translateX(0);
   }
 }
+
+.contact-container {
+  background-image: linear-gradient(131deg, #202933, rgb(83, 60, 121), rgb(19, 233, 169));
+  background-size: 300% 100%;
+  animation: gradientAnimation 15s linear infinite;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.move-left {
+  opacity: 1;
+  transform: translateX(0);
+  animation: moveLeft 2s forwards;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+.text-center h1 {
+  font-size: 3em; 
+}
+
+.text-center h5 {
+  font-size: 1.7em; 
+}
+
+.fade-left-icons {
+  opacity: 0;
+  transform: translateX(200px);
+  animation: fadeLeftIcons 7s forwards;
+}
+
+@keyframes fadeLeftIcons {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.post-container {
+  background-image: linear-gradient(131deg, #157ba3, rgb(110, 146, 245), rgb(255, 255, 255));
+  background-size: 300% 100%;
+  animation: gradientAnimation 15s linear infinite;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.left-container {
+  margin-right: 280px
+}
+
+.left-container {
+  
+    opacity: 0;
+    transform: translateX(200px);
+    animation: leftContainer 2s forwards;
+}
+  
+  @keyframes leftContainer {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .txt-big {
+    font-size: 1.3em; 
+  }

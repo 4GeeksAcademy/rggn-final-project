@@ -1,15 +1,18 @@
-import React, {useState} from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+
 
 export const PostViews = () => {
 
-    const [post, setPost] = useState({
-        img: "img"
-    });
-
-    const postsChange = (event) => {
-        setPost({ [event.target.img]: event.target.value });
-      };
-
+    const { store, actions } = useContext(Context)
+    const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        const getData = async () => {
+            const data = await actions.getAllPosts()
+            setPosts(data)
+        }
+        getData()
+    }, [])
     return (
         <>
             {/* NAVBAR */}
@@ -49,43 +52,26 @@ export const PostViews = () => {
                         <br />
                         POSTS
                         <hr></hr>
-
-                        <div>
-                            VENEZUELA
-                            <div className="card my-card border border-danger" >
-                                <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div>
-                            ARGENTINA
-                            <div className="card my-card border border-danger" >
-                                <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div>
-                            PERU
-                            <div className="card my-card border border-danger" >
-                                <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
-                                <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
+                        <div className="card my-card border border-danger" >
+                        <div className="card-header">ARGENTINA</div>
+                        <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title">Card title</h5>
+                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" className="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
+
+
+                    {/* {store.posts == false && <p>hubo un error al cargar posts</p> }
+                    {store.posts && store.posts.length > 0 && store.posts.map((post, index) => {
+                        return ()
+                    })} */}
+                        
+                    </div>
+                    <br />
+
+
                 </div>
             </div>
         </>
