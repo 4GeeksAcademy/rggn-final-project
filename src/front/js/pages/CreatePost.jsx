@@ -30,7 +30,7 @@ const CreatePost = () => {
 
     const handlePost = async (event) => {
         event.preventDefault()
-        let response = await actions.registerPost(post)
+        let response = await actions.addPost(post)
         console.log(post)
         if (response) {
             navigate("/posts")
