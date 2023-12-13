@@ -170,4 +170,3 @@ def save_post():
     except Exception as error:
         print(error)
         return jsonify({"message":"error creating post"}), 500
-    
