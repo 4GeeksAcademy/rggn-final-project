@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 
 
 export const PostViews = () => {
@@ -53,7 +56,11 @@ export const PostViews = () => {
                         POSTS
                         <hr></hr>
                         <div className="card my-card border border-danger" >
-                        <div className="card-header">ARGENTINA</div>
+                        <div className="card-header">
+                ARGENTINA
+                <FontAwesomeIcon icon={faTrashCan} style={{color: "#000000", float: "right"}} />
+                <FontAwesomeIcon icon={faPen} style={{ color: "#000000", float: "right", marginRight:"10px" }} />
+            </div>
                         <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title">Card title</h5>
