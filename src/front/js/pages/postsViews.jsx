@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrashCan, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
+
 
 
 export const PostViews = () => {
 
     const { store, actions } = useContext(Context)
+    const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -13,6 +18,36 @@ export const PostViews = () => {
         }
         getData()
     }, [])
+
+
+    const handleEditClick = () => {
+        
+        navigate("/editPost");
+      };
+
+      const handleDeleteClick = () => {
+    
+        Swal.fire({
+          title: "Estas seguro?",
+          text: "Importante! No podrás revertir esta acción.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Borrar Publicacion"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            
+            Swal.fire({
+              title: "Borrada",
+              text: "Tu publicacion ha sido borrada.",
+              icon: "success"
+            });
+        }
+      });
+    };
+
+
     return (
         <>
             <div>          
@@ -35,7 +70,7 @@ export const PostViews = () => {
                             </div>)
                         })}
                     </div>   
-                </div>
+                </div>             
             </div>
         </>
     )

@@ -12,6 +12,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Landing } from "./component/landing";
+import { EditPost } from "./component/editPost.jsx";
 import { Donations } from "./component/donations.jsx";
 import { Contact } from "./component/contact.jsx";
 import { Services } from "./component/services.jsx";
@@ -44,6 +45,7 @@ const Layout = () => {
                         <Route element={<Contact />} path="/contact" />
                         <Route element={<Donations />} path="/donations" />
                         <Route element={<CreatePost />} path="/createPost" />
+                        <Route element={<EditPost />} path="/editPost" />
                         <Route element={<Home />} path="/" />
                     </Routes>
 

@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from base64 import b64encode
 import os
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from datetime import datetime
 
 api = Blueprint('api', __name__)
 
@@ -119,7 +120,7 @@ def handle_signup():
 
 
 
-
+#get Post
 @api.route('/posts', methods=['GET'])
 def get_all_posts():
     posts = Posts.query.all()
@@ -137,28 +138,27 @@ def get_all_posts():
     # }))
     # return jsonify(result), 200
 
+#create Post
 @api.route('/posts', methods=['POST'])
 @jwt_required()
 def save_post(): 
     uid = get_jwt_identity()["user_id"]
-   
     data_form = request.form
     data_file = request.files
     data = {
         "title":data_form.get("title"),
         "img": 'data_file.get("img")',
         "comment": data_form.get("comment"),
-        "date":data_form.get("date"),
         "user_id": uid,
         "post_category": data_form.get("post_category"),
         # "post_tag": data_form.get("post_tag"),
     }
-    
+
+
     post = Posts(
         title=data.get("title"), 
         img=data.get("img"),
         comment=data.get("comment"),
-        date=data.get("date"),
         user_id= uid,
         # post_category=data.get("post_category"),
         # post_tag=data.get("post_tag")
@@ -171,3 +171,40 @@ def save_post():
     except Exception as error:
         print(error)
         return jsonify({"message":"error creating post"}), 500
+
+#editar Post
+@api.route('/editPost/<int:id>', methods=['PUT'])
+@jwt_required()
+def edit_post(id):
+    one_post = Posts.query.get(id)
+    if one_post is None:
+        return jsonify({"message": "post not found"}), 404
+    data_form = request.form
+    data = {
+        "comment": data_form.get("comment"),
+    }
+    one_post.comment = data["comment"]
+    try:
+        db.session.commit()
+        return jsonify({"message":"post edited succesfully"}),201
+    except Exception as error:
+        print(error)
+        return jsonify({"message":"error editing post"}), 500
+
+@api.route('/deletePost/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_post(id):
+    one_post = Posts.query.get(id)
+    if one_post is None:
+        return jsonify({"message": "post not found"}), 404
+    db.session.delete(one_post)
+    try:
+        db.session.commit()
+        return jsonify({"message":"post deleted succesfully"}),201
+    except Exception as error:
+        print(error)
+        return jsonify({"message":"error deleting post"}), 500
+
+
+
+    
