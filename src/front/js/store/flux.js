@@ -107,26 +107,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			addPost: async (post) => {
-				let store = getStore();
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
 						headers: {
 							"Authorization": `Bearer ${store.token}`
 						},
 						method: "POST",
-						body: post
-					}
-					)
-					const data = await response.json()
-					console.log(data)
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(post),
+					});
+			
+					const data = await response.json();
+					console.log(data);
+			
 					if (response.ok) {
-						return true
+						return true;
 					} else {
-						return false
+						return false;
 					}
-
 				} catch (error) {
-					console.log(error)
+					console.log(error);
 				}
 			},
 

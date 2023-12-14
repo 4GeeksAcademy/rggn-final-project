@@ -6,9 +6,6 @@
     width: 18rem;
 }
 
-.my-posts{
-    overflow-y: scroll;
-}
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
 
 
@@ -274,4 +271,10 @@
 
   .txt-big {
     font-size: 1.3em; 
+  }
+
+  .post-card {
+    font-family: 'Raleway', sans-serif;
+    height: 100vh;
+    background-color: #383636;
   }

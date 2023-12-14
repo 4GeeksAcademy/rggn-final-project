@@ -51,6 +51,7 @@ const CreatePost = () => {
 
     }
 
+
     const countries = ["Venezuela", "Argentina", "Ecuador"]
     const cities = ["Maracaibo", "Buenos Aires", "Quito"]
 
