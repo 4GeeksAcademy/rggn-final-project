@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			signup: async (name, email, password, countries) => {
+			signup: async (name, email, password, countries) => {				
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
 				console.log(respuesta)
@@ -170,6 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getAllPosts: async() => {
+				const { apiFetch } = getActions()
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
 					return response
