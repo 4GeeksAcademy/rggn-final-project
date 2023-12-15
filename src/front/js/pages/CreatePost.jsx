@@ -2,9 +2,19 @@ import React, { useState, useContext, useEffect } from "react"
 import { Context } from "../store/appContext"
 import { Navigate, useNavigate } from "react-router-dom"
 
+const initialState = {
+    img: "",
+    title: "",
+    comment: "",
+    date: new Date(),
+    country: "",
+    post_category: 0,
+    city: ""
+}
+
 const CreatePost = () => {
     const navigate = useNavigate()
-    const { store, actions } = useContext(Context)
+    const { actions } = useContext(Context)
 
     const [post, setPost] = useState(
         {
@@ -85,7 +95,7 @@ const CreatePost = () => {
                                             name="title"
                                             value={post.title}
                                             onChange={handleChange}
-                                            // {/* date buscar funcion de date */ }
+                                        // {/* date buscar funcion de date */ }
                                         />
                                     </div>
 
@@ -111,7 +121,7 @@ const CreatePost = () => {
                                         >
                                             <option value="">Select country</option>
                                             {countries.map((countries, index) => (
-                                                <option key={index} value={countries}>{countries}</option>
+                                                <option key={index} value={index + 1}>{countries}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -187,9 +197,9 @@ const CreatePost = () => {
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-4 text-center pe-5 me-5 d-flex flex-column justify-content-center text-dark txt-big">
-                <h1 className="fade-right">Comparte contenido</h1>
-                <h5 className="fade-right">Crea una publicacion sobre tu aventura!</h5>
-            </div>
+                            <h1 className="fade-right">Comparte contenido</h1>
+                            <h5 className="fade-right">Crea una publicacion sobre tu aventura!</h5>
+                        </div>
                     </div>
                 </div>
             </div>

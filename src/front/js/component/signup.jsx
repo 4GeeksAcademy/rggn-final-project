@@ -33,10 +33,10 @@ export const Signup = () => {
 
   const signupClick = async (e) => {
 
-    e.preventDefault()
+    // e.preventDefault()
     try {
       const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries);
-      console.log(respuesta);
+      
       Swal.fire({
         title: '¡Registro exitoso!',
         text: 'Bienvenido a nuestra comunidad.',
@@ -44,10 +44,10 @@ export const Signup = () => {
         confirmButtonText: 'OK'
       });
 
-      if (respuesta.msg == "ok") {
-        navigate("/postviews")
+      if (respuesta && respuesta.msg === "ok") {
+        navigate("/postviews");
     }
-
+    console.log(respuesta);
     } catch (error) {
       console.error("Error al realizar el registro:", error);
 

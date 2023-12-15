@@ -66,12 +66,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+
 			signup: async (name, email, password, countries) => {
+
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
 				console.log(respuesta)
-				return respuesta
-
 
 				// try {
 				// 	const response = await fetch('/signup', {
@@ -105,40 +105,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
-			// getMessage: async () => {
-			// 	try {
-			// 		// fetching data from the backend
-			// 		const resp = await fetch(process.env.BACKEND_URL + "/hello")
-			// 		const data = await resp.json()
-			// 		setStore({ message: data.message })
-			// 		// don't forget to return something, that is how the async resolves
-			// 		return data;
-			// 	} catch (error) {
-			// 		console.log("Error loading message from backend", error)
-			// 	}
-			// },
-			
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
 
 			addPost: async (post) => {
 				let store = getStore();
 				console.log(post)
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
 						method: "POST",
 						headers: {
 							"Authorization": "Bearer "+store.token
@@ -153,7 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						return false
 					}
-	
+
 				} catch (error) {
 					console.log(error)
 				}
@@ -169,18 +145,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
-	
 				}
 			},
 
-			getAllPosts: async() => {
-				const response = await apiFetch("/posts")
-				if (response.msg == "ok") {
-					return response
-				} 
-				return false
-	}
-	
-}}}
+			getAllPosts: async () => {
+				// const { apiFetch } = getActions()
+				// const response = await apiFetch("/posts")
+				// if (response.msg == "ok") {
+				// 	return response
+				// }
+				// return false
+				let store = getStore()
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						}
+					})
+
+					if (response.ok) {
+						let result = await response.json()
+						setStore({
+							posts: result
+						})
+					}
+					if (response.status == 401 || response.status == 422) {
+						getActions().logout()
+					}
+					console.log(response.status)
+				} catch (error) {
+					conasole.log(error)
+				}
+			}
+
+
+		}
+	};
+};
+
+
+
+
 
 export default getState;
