@@ -25,8 +25,7 @@ export const PostViews = () => {
         navigate("/editPost");
     };
 
-    const handleDeleteClick = () => {
-
+    const handleDeleteClick = async (postId) => {
         Swal.fire({
             title: "Estas seguro?",
             text: "Importante! No podrás revertir esta acción.",
@@ -35,9 +34,9 @@ export const PostViews = () => {
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Borrar Publicacion"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-
+                await actions.deletePost(postId);
                 Swal.fire({
                     title: "Borrada",
                     text: "Tu publicacion ha sido borrada.",
@@ -46,6 +45,8 @@ export const PostViews = () => {
             }
         });
     };
+
+
 
 
     return (

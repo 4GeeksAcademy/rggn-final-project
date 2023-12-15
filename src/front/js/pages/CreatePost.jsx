@@ -45,7 +45,7 @@ const CreatePost = () => {
         let response = await actions.addPost(formData)
         console.log(post)
         if (response) {
-            navigate("/posts")
+            navigate("/postviews")
         }
         console.log(response)
 

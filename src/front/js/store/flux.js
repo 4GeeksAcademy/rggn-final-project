@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-			signup: async (name, email, password, countries) => {				
+			signup: async (name, email, password, countries) => {
 
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
@@ -156,22 +156,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
 
-			
-		}
-	};
-};
-
-			getAllPosts: async() => {
+			getAllPosts: async () => {
 				const { apiFetch } = getActions()
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
 					return response
-				} 
+				}
 				return false
-	}
-	
+			},
+
+			
+			deletePost: async (postId) => {
+				try {
+					const store = getStore();
+			
+					const postToDelete = await Posts.query.get(postId);
+			
+					if (!postToDelete) {
+						console.error('La publicación no existe.');
+						return;
+					}
+			
+					await db.session.delete(postToDelete);
+					await db.session.commit();
+			
+					const updatedPosts = await getActions().getAllPosts();
+			
+					setStore({ ...store, posts: updatedPosts });
+			
+				} catch (deleteError) {
+					console.error('Error al borrar la publicación:', deleteError.message);
+				}
+			}
+
+
+		}
+	};
+};
+
+
+
 
 
 export default getState;
