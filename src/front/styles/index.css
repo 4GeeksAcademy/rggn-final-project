@@ -3,7 +3,8 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 .my-card{
-    width: 18rem;
+    width: 35rem;
+    margin-bottom: 10px
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
@@ -275,6 +276,6 @@
 
   .post-card {
     font-family: 'Raleway', sans-serif;
-    height: 100vh;
+    height: 100%;
     background-color: #383636;
   }
