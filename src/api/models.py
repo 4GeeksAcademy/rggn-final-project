@@ -59,31 +59,31 @@ class Categories(db.Model):
 
         }
 
-class Tags(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    post_tag = db.relationship("Post_Tag", backref="tags")
+# class Tags(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(120), nullable=False)
+#     post_tag = db.relationship("Post_Tag", backref="tags")
 
-    def __repr__(self):
-        return f'<Tags {self.name}>'
+#     def __repr__(self):
+#         return f'<Tags {self.name}>'
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "name": self.name,
 
-        }
+#         }
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    img = db.Column(db.String(300), nullable=False)
+    img = db.Column(db.String(400), nullable=True)
     title = db.Column(db.String(150), nullable=False)
     comment = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    # date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))
     # post_category = db.relationship("Post_Category", backref= db.backref("posts"))
-    post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
+    # post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
     countries_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
 
 
@@ -92,19 +92,19 @@ class Posts(db.Model):
         return f'<Posts {self.title}>'
 
     def serialize(self):
-        categories = Categories.query.filter_by(id = self.id).all()
-        serialized_categories = list(map(lambda x: x.serialize(), categories))
+        # categories = Categories.query.filter_by(id = self.id).all()
+        # serialized_categories = list(map(lambda x: x.serialize(), categories))
 
-        tags = Post_Tag.query.filter_by(post_id = self.id).all()
-        serialized_tags = list(map(lambda x: x.serialize(), tags))
+        # tags = Post_Tag.query.filter_by(post_id = self.id).all()
+        # serialized_tags = list(map(lambda x: x.serialize(), tags))
         return {
             "id": self.id,
             "img": self.img,
             "title": self.title,
             "comment": self.comment,
-            "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
-            "categories": serialized_categories,
-            "tags": serialized_tags,
+            # "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
+            "category": self.post_category,
+            # "tags": serialized_tags,
             "user_id": self.user_id,
             "countries_id": self.countries_id
         }
@@ -129,25 +129,25 @@ class Posts(db.Model):
  
 #         }
 
-class Post_Tag(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"))
-    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
+# class Post_Tag(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"))
+#     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
     
 
 
 
-    def __repr__(self):
-        return f'<Post_Tag {self.id}>'
+#     def __repr__(self):
+#         return f'<Post_Tag {self.id}>'
 
-    def serialize(self):
-        tag = Tags.query.get(self.tag_id)
-        return {
-            "id": self.id,
-            "tag": tag.serialize()["name"],
-            "post_id": self.post_id,
+#     def serialize(self):
+#         tag = Tags.query.get(self.tag_id)
+#         return {
+#             "id": self.id,
+#             "tag": tag.serialize()["name"],
+#             "post_id": self.post_id,
  
-        }
+#         }
 
 
     # def tags_serialize(self):

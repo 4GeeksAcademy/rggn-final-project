@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 
-			token: sessionStorage.getItem("token") || null,
+			token: localStorage.getItem("token") || null,
 			user: sessionStorage.getItem("user_id") || null
 
 		},
@@ -136,9 +136,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addPost: async (post) => {
 				let store = getStore();
+				console.log(post)
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
 						method: "POST",
+						headers: {
+							"Authorization": "Bearer "+store.token
+						},
 						body: post
 					}
 					)

@@ -11,9 +11,9 @@ const CreatePost = () => {
             img: "",
             title: "",
             comment: "",
-            date: new Date(),
+            // date: new Date(),
             country: "",
-            post_category: "",
+            categories: "",
             city: ""
         }
     )
@@ -30,8 +30,18 @@ const CreatePost = () => {
 
     const handlePost = async (event) => {
         event.preventDefault()
-        let response = await actions.addPost(post)
+       
+
+        const formData = new FormData()
+        formData.append("title", post.title)
+        formData.append("comment", post.comment)
+        formData.append("img", post.img)
+        formData.append("categories", post.categories)
+        formData.append("country", post.country)
+        
+    let response = await actions.addPost(formData)
         console.log(post)
+
         if (response) {
             navigate("/posts")
         }
@@ -39,9 +49,24 @@ const CreatePost = () => {
 
     }
 
+    const handleImage = (event)=>{
+        console.log(typeof event.target.files[0].type)
+        if(event.target.files[0].type === "image/png"){
+            let aux = post
+            aux.img = event.target.files[0]
+            setPost(aux)
+            console.log(event.target.files[0])
+        }else{
+            console.log("No compatible")
+        }
+    }
+
     const countries = ["Venezuela", "Argentina", "Ecuador"]
     const cities = ["Maracaibo", "Buenos Aires", "Quito"]
-
+    
+    useEffect(() => {
+        console.log(post)
+    },[post])
     return (
         <>
             <div className="post-container d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
@@ -111,9 +136,10 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault1"
                                                 value="destino"
+                                                onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault1">Destino</label>
                                         </div>
@@ -121,9 +147,10 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault2"
                                                 value="gastronomia"
+                                                onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault2">Gastronomía</label>
                                         </div>
@@ -131,9 +158,11 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault3"
                                                 value="actividad"
+                                                onChange={handleChange}
+
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault3">Actividad</label>
                                         </div>
@@ -146,8 +175,8 @@ const CreatePost = () => {
                                             type="file"
                                             id="fileImg"
                                             name="img"
-                                            value={post.img}
-                                            onChange={handleChange}
+                                            value={post.img.name}
+                                            onChange={handleImage}
                                         />
                                     </div>
 

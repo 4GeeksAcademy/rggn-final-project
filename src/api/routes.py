@@ -1,15 +1,15 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Countries, Posts, Tags, Post_Tag
+from flask import Flask, request, jsonify, url_for, Blueprint, current_app
+from api.models import db, User, Countries, Posts, Categories
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
-import cloudinary.uploader as uploader
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from base64 import b64encode
-import os
+import os, base64
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
@@ -133,35 +133,43 @@ def get_all_posts():
 @jwt_required()
 def save_post(): 
     uid = get_jwt_identity()["user_id"]
-   
     data_form = request.form
-    data_file = request.files
+    # files = request.files['img']
+    # cloud_result = current_app.cloudinary.uploader.upload(files.read())
+    print(data_form.get("categories"))
+
+    category = Categories.query.filter_by(name = data_form.get("categories")).first()
+    # country = Countries.query.filter_by(name = data_form.get("country")).first()
+    print(category)
     data = {
         "title":data_form.get("title"),
-        "img": 'data_file.get("img")',
+        # "img": cloud_result["secure_url"],
         "comment": data_form.get("comment"),
-        "date":data_form.get("date"),
+        # "date":data_form.get("date"),
         "user_id": uid,
-        "post_category": data_form.get("post_category"),
+        "category": category.serialize()["id"],
+        # "country": country.serialize()["id"],
         # "post_tag": data_form.get("post_tag"),
     }
-    
+    print(data)
     post = Posts(
-        title=data.get("title"), 
-        img=data.get("img"),
-        comment=data.get("comment"),
-        date=data.get("date"),
+        title=data["title"], 
+        # img=data["img"],
+        comment=data["comment"],
+        post_category = data["category"],
+        # countries_id = data["country"],
+        # date=data["date"],
         user_id= uid,
        
         )
     db.session.add(post)
 
-    try:
-        db.session.commit()
-        return jsonify({"message":"post created succesfully"}),201
-    except Exception as error:
-        print(error)
-        return jsonify({"message":"error creating post"}), 500
+    # try:
+    db.session.commit()
+    return jsonify({"message":"post created succesfully"}),201
+    # except Exception as error:
+    #     print(error)
+    #     return jsonify({"message":"error creating post"}), 500
 
 # @api.route('/posts/countries', methods=['GET'])
 # def get_all_posts_by_country():
