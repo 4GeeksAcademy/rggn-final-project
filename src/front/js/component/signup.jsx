@@ -44,8 +44,8 @@ export const Signup = () => {
         confirmButtonText: 'OK'
       });
 
-      if (respuesta.msg == "ok") {
-        navigate("/postviews")
+      if (respuesta && respuesta.msg === "ok") {
+        navigate("/postviews");
     }
     console.log(respuesta);
     } catch (error) {

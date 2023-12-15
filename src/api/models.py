@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -31,6 +32,7 @@ class Countries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     users = db.relationship("User", backref= db.backref("countries"))
+    posts = db.relationship("Posts", backref= db.backref("countries"))
 
     def __repr__(self):
         return f'<Countries {self.name}>'
@@ -78,11 +80,12 @@ class Posts(db.Model):
     img = db.Column(db.String(300), nullable=False)
     title = db.Column(db.String(150), nullable=False)
     comment = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default= date.today())
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))   OJO
     # post_category = db.relationship("Post_Category", backref= db.backref("posts"))
     post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
+    countries_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
 
 
 
@@ -90,8 +93,8 @@ class Posts(db.Model):
         return f'<Posts {self.title}>'
 
     def serialize(self):
-        # categories = Post_Category.query.filter_by(post_id = self.id).all() OJO
-        # serialized_categories = list(map(lambda x: x.serialize(), categories)) OJO
+        categories = Categories.query.filter_by(id = self.id).all()
+        serialized_categories = list(map(lambda x: x.serialize(), categories))
 
         tags = Post_Tag.query.filter_by(post_id = self.id).all()
         serialized_tags = list(map(lambda x: x.serialize(), tags))
@@ -103,7 +106,8 @@ class Posts(db.Model):
             "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
             # "categories": serialized_categories, OJO
             "tags": serialized_tags,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "countries_id": self.countries_id
         }
     
 # class Post_Category(db.Model):

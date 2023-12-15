@@ -54,7 +54,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+
 			signup: async (name, email, password, countries) => {				
+
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
 				console.log(respuesta)
@@ -86,23 +88,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addPost: async (post) => {
-				let store = getStore();
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
 						method: "POST",
-						body: post
-					}
-					)
-					const data = await response.json()
-					console.log(data)
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(post),
+					});
+			
+					const data = await response.json();
+					console.log(data);
+			
 					if (response.ok) {
-						return true
+						return true;
 					} else {
-						return false
+						return false;
 					}
-	
 				} catch (error) {
-					console.log(error)
+					console.log(error);
 				}
 			},
 
@@ -116,8 +123,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
-	
 				}
+			},
+			changeColor: (index, color) => {
+				//get the store
+				const store = getStore();
+
+				//we have to loop the entire demo array to look for the respective index
+				//and change its color
+				const demo = store.demo.map((elm, i) => {
+					if (i === index) elm.background = color;
+					return elm;
+				});
+
+				//reset the global store
+				setStore({ demo: demo });
 			},
 
 			getAllPosts: async() => {		
@@ -129,7 +149,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} 
 				return false
 	}
+
+			
+		}
+	};
+};
+
+			
 	
-}}}
+
 
 export default getState;
