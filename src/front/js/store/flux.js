@@ -16,8 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 
 			token: sessionStorage.getItem("token") || null,
-			user: sessionStorage.getItem("user_id") || null
-
+			user: sessionStorage.getItem("user_id") || null,
+			posts: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-			signup: async (name, email, password, countries) => {				
+			signup: async (name, email, password, countries) => {
 
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
@@ -143,35 +143,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getAllPosts: async () => {
+				// const { apiFetch } = getActions()
+				// const response = await apiFetch("/posts")
+				// if (response.msg == "ok") {
+				// 	return response
+				// }
+				// return false
+				let store = getStore()
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						}
+					})
 
-				//reset the global store
-				setStore({ demo: demo });
+					if (response.ok) {
+						let result = await response.json()
+						setStore({
+							posts: result
+						})
+					}
+					if (response.status == 401 || response.status == 422) {
+						getActions().logout()
+					}
+					console.log(response.status)
+				} catch (error) {
+					conasole.log(error)
+				}
 			}
 
-			
+
 		}
 	};
 };
 
-			getAllPosts: async() => {
-				const { apiFetch } = getActions()
-				const response = await apiFetch("/posts")
-				if (response.msg == "ok") {
-					return response
-				} 
-				return false
-	}
-	
+
+
 
 
 export default getState;

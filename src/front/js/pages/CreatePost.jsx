@@ -99,7 +99,7 @@ const CreatePost = () => {
                                         >
                                             <option value="">Select country</option>
                                             {countries.map((countries, index) => (
-                                                <option key={index} value={countries}>{countries}</option>
+                                                <option key={index} value={index + 1}>{countries}</option>
                                             ))}
                                         </select>
                                     </div>
