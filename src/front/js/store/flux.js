@@ -1,19 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
+			posts: [],
 
 			token: sessionStorage.getItem("token") || null,
 			user: sessionStorage.getItem("user_id") || null
@@ -72,30 +60,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(respuesta)
 				return respuesta
 
-
-				// try {
-				// 	const response = await fetch('/signup', {
-				// 		method: 'POST',
-				// 		headers: {
-				// 			'Content-Type': 'application/json',
-				// 		},
-				// 		body: JSON.stringify({
-				// 			email: formData.get('email'),
-				// 			name: formData.get('name'),
-				// 			password: formData.get('password'),
-				// 			countries: formData.get('countries'),
-				// 		}),
-				// 	});
-
-				// 	if (!response.ok) {
-				// 		throw new Error('Error al crear el usuario');
-				// 	}
-
-				// 	const data = await response.json();
-				// 	console.log('Usuario creado exitosamente:', data.msg);
-				// } catch (error) {
-				// 	console.error('Error:', error.message);
-				// }
 			},
 
 			logOut: () => {
@@ -104,19 +68,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: null
 				})
 			},
-
-			// getMessage: async () => {
-			// 	try {
-			// 		// fetching data from the backend
-			// 		const resp = await fetch(process.env.BACKEND_URL + "/hello")
-			// 		const data = await resp.json()
-			// 		setStore({ message: data.message })
-			// 		// don't forget to return something, that is how the async resolves
-			// 		return data;
-			// 	} catch (error) {
-			// 		console.log("Error loading message from backend", error)
-			// 	}
-			// },
 			
 			changeColor: (index, color) => {
 				//get the store
@@ -169,11 +120,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getAllPosts: async() => {
+			getAllPosts: async() => {		
 				const { apiFetch } = getActions()
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
-					return response
+					console.log(response)
+					setStore({ posts: response.data })
 				} 
 				return false
 	}

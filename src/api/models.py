@@ -80,7 +80,7 @@ class Posts(db.Model):
     comment = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    # post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))   OJO
     # post_category = db.relationship("Post_Category", backref= db.backref("posts"))
     post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
 
@@ -90,8 +90,8 @@ class Posts(db.Model):
         return f'<Posts {self.title}>'
 
     def serialize(self):
-        categories = Post_Category.query.filter_by(post_id = self.id).all()
-        serialized_categories = list(map(lambda x: x.serialize(), categories))
+        # categories = Post_Category.query.filter_by(post_id = self.id).all() OJO
+        # serialized_categories = list(map(lambda x: x.serialize(), categories)) OJO
 
         tags = Post_Tag.query.filter_by(post_id = self.id).all()
         serialized_tags = list(map(lambda x: x.serialize(), tags))
@@ -101,7 +101,7 @@ class Posts(db.Model):
             "title": self.title,
             "comment": self.comment,
             "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
-            "categories": serialized_categories,
+            # "categories": serialized_categories, OJO
             "tags": serialized_tags,
             "user_id": self.user_id
         }
