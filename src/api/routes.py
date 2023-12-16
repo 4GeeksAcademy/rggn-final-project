@@ -12,6 +12,7 @@ from base64 import b64encode
 import os
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from datetime import datetime
+import cloudinary.uploader as uploader
 
 api = Blueprint('api', __name__)
 
@@ -147,12 +148,20 @@ def save_post():
     data_file = request.files
     data = {
         "title":data_form.get("title"),
-        "img": 'data_file.get("img")',
+        "img": data_file.get("img_post"),
         "comment": data_form.get("comment"),
         "user_id": uid,
         "post_category": data_form.get("post_category"),
         # "post_tag": data_form.get("post_tag"),
     }
+    # validaciones
+
+    #guardamos image en cloudinary
+    result_img_post = uploader.upload(data_file.get("img_post"))
+    
+    data.update({"img":result_img_post.get("secure_url")})
+    # data.update({"img":result_img_post.get("secure_url")})
+
 
 
     post = Posts(
@@ -171,6 +180,8 @@ def save_post():
     except Exception as error:
         print(error)
         return jsonify({"message":"error creating post"}), 500
+    
+
 
 #editar Post
 @api.route('/editPost/<int:id>', methods=['PUT'])
