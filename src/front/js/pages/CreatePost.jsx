@@ -6,7 +6,7 @@ const initialState = {
     img: "",
     title: "",
     comment: "",
-    date: new Date(),
+    // date: new Date(),
     country: "",
     post_category: 0,
     city: ""
@@ -16,26 +16,16 @@ const CreatePost = () => {
     const navigate = useNavigate()
     const { actions } = useContext(Context)
 
-    const [post, setPost] = useState(
-        {
-            img: "",
-            title: "",
-            comment: "",
-            // date: new Date(),
-            country: "",
-            categories: "",
-            city: ""
-        }
-    )
+    const [post, setPost] = useState(initialState)
 
 
     const handleChange = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         setPost({
             ...post,
             [event.target.name]: event.target.value
         })
-        console.log(post)
+        // console.log(post)
     }
 
     const handlePost = async (event) => {
@@ -50,7 +40,7 @@ const CreatePost = () => {
         formData.append("country", post.country)
         
     let response = await actions.addPost(formData)
-        console.log(post)
+        // console.log(post)
 
         if (response) {
             navigate("/posts")
@@ -59,24 +49,24 @@ const CreatePost = () => {
 
     }
 
-    const handleImage = (event)=>{
-        console.log(typeof event.target.files[0].type)
-        if(event.target.files[0].type === "image/png"){
-            let aux = post
-            aux.img = event.target.files[0]
-            setPost(aux)
-            console.log(event.target.files[0])
-        }else{
-            console.log("No compatible")
-        }
-    }
+    // const handleImage = (event)=>{
+    //     console.log(typeof event.target.files[0].type)
+    //     if(event.target.files[0].type === "image/png"){
+    //         let aux = post
+    //         aux.img = event.target.files[0]
+    //         setPost(aux)
+    //         console.log(event.target.files[0])
+    //     }else{
+    //         console.log("No compatible")
+    //     }
+    // }
 
     const countries = ["Venezuela", "Argentina", "Ecuador"]
     const cities = ["Maracaibo", "Buenos Aires", "Quito"]
     
-    useEffect(() => {
-        console.log(post)
-    },[post])
+    // useEffect(() => {
+    //     // console.log(post)
+    // },[post])
     return (
         <>
             <div className="post-container d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
