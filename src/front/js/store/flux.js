@@ -3,9 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			posts: [],
 
-			token: sessionStorage.getItem("token") || null,
-			user: sessionStorage.getItem("user_id") || null,
-			posts: []
+			token: localStorage.getItem("token") || null,
+			user: sessionStorage.getItem("user_id") || null
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
