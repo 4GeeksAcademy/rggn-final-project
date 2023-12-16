@@ -72,6 +72,9 @@ export const Navbar = () => {
 								<Link to="/createPost">
 									<button className="btn btn-info bg-dark text-info me-4 mt-1">Create Post</button>
 								</Link>
+								<Link to="/postviews">
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">View Post</button>
+								</Link>
 								<button className="btn btn-danger mx-2" onClick={handleLogout}>logOut</button>
 							</>)}
 					</ul>

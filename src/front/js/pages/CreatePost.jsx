@@ -40,10 +40,6 @@ const CreatePost = () => {
         formData.append("country", post.country)
         
         let response = await actions.addPost(formData)
-        // console.log(post)
-
-
-        // let response = await actions.addPost(formData)
         if (response) {
             navigate("/postviews")
         }
