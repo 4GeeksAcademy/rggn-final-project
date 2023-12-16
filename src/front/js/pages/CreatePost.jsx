@@ -3,7 +3,7 @@ import { Context } from "../store/appContext"
 import { Navigate, useNavigate } from "react-router-dom"
 
 const initialState = {
-    img: "",
+    img_post: "",
     title: "",
     comment: "",
     // date: new Date(),
@@ -33,19 +33,21 @@ const CreatePost = () => {
        
 
         const formData = new FormData()
+        formData.append("img_post", post.img_post)
         formData.append("title", post.title)
         formData.append("comment", post.comment)
-        formData.append("img", post.img)
-        formData.append("categories", post.categories)
+        // formData.append("date", post.date)
         formData.append("country", post.country)
         
-    let response = await actions.addPost(formData)
+        let response = await actions.addPost(formData)
         // console.log(post)
 
+
+        // let response = await actions.addPost(formData)
         if (response) {
-            navigate("/posts")
+            navigate("/postviews")
         }
-        console.log(response)
+        // console.log(response)
 
     }
 
@@ -174,9 +176,11 @@ const CreatePost = () => {
                                             className="form-control"
                                             type="file"
                                             id="fileImg"
-                                            name="img"
-                                            value={post.img.name}
-                                            onChange={handleImage}
+                                            name="img_post"
+                                            // value={post.img}
+                                            onChange={(event) => {
+                                                setPost({ ...post, img_post: event.target.files[0] })
+                                            }}
                                         />
                                     </div>
 

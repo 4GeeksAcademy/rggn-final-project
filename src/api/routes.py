@@ -12,6 +12,7 @@ from base64 import b64encode
 import os, base64
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from datetime import datetime
+import cloudinary.uploader as uploader
 
 api = Blueprint('api', __name__)
 
@@ -153,7 +154,7 @@ def save_post():
     print(category)
     data = {
         "title":data_form.get("title"),
-        # "img": cloud_result["secure_url"],
+        "img": data_file.get("img_post"),
         "comment": data_form.get("comment"),
         # "date":data_form.get("date"),
         "user_id": uid,
@@ -161,7 +162,16 @@ def save_post():
         # "country": country.serialize()["id"],
         # "post_tag": data_form.get("post_tag"),
     }
-    print(data)
+    # validaciones
+
+    #guardamos image en cloudinary
+    result_img_post = uploader.upload(data_file.get("img_post"))
+    
+    data.update({"img":result_img_post.get("secure_url")})
+    # data.update({"img":result_img_post.get("secure_url")})
+
+
+
     post = Posts(
         title=data["title"], 
         # img=data["img"],
@@ -175,12 +185,14 @@ def save_post():
         )
     db.session.add(post)
 
-    # try:
-    db.session.commit()
-    return jsonify({"message":"post created succesfully"}),201
-    # except Exception as error:
-    #     print(error)
-    #     return jsonify({"message":"error creating post"}), 500
+    try:
+        db.session.commit()
+        return jsonify({"message":"post created succesfully"}),201
+    except Exception as error:
+        print(error)
+        return jsonify({"message":"error creating post"}), 500
+    
+
 
 #editar Post
 @api.route('/editPost/<int:id>', methods=['PUT'])

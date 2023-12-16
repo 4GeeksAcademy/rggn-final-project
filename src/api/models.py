@@ -82,7 +82,7 @@ class Posts(db.Model):
     comment = db.Column(db.Text, nullable=False)
     # date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    # post_category = db.Column(db.Integer, db.ForeignKey("categories.id"))   OJO
     # post_category = db.relationship("Post_Category", backref= db.backref("posts"))
     # post_tag = db.relationship("Post_Tag", backref="posts", uselist=True)
     countries_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
@@ -103,9 +103,9 @@ class Posts(db.Model):
             "img": self.img,
             "title": self.title,
             "comment": self.comment,
-            # "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
-            "category": self.post_category,
-            # "tags": serialized_tags,
+            "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
+            # "categories": serialized_categories, OJO
+            "tags": serialized_tags,
             "user_id": self.user_id,
             "countries_id": self.countries_id
         }
