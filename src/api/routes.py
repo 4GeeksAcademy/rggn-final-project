@@ -56,6 +56,7 @@ def handle_login():
                 return jsonify({"token":token}), 200
             else:
                 return jsonify({"message":"bad credentials"}), 400
+            
 @api.route('/user', methods=['GET'])
 def get_all_users():
     users = User.query.all()
