@@ -14,7 +14,7 @@ export const PostViews = () => {
     useEffect(() => {
         const getData = async () => {
             const data = await actions.getAllPosts()
-            // setPosts(data.data)
+            setPosts(data)
         }
         getData()
     }, [])
@@ -70,6 +70,7 @@ export const PostViews = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{post.title}</h5>
                                     <p className="card-text">{post.comment}</p>
+                                    <a href="#" className="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>)
                         })}
@@ -82,3 +83,5 @@ export const PostViews = () => {
 }
 
 export default PostViews
+
+
