@@ -103,9 +103,9 @@ class Posts(db.Model):
             "img": self.img,
             "title": self.title,
             "comment": self.comment,
-            "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
+            # "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
             # "categories": serialized_categories, OJO
-            "tags": serialized_tags,
+            # "tags": serialized_tags,
             "user_id": self.user_id,
             "countries_id": self.countries_id
         }

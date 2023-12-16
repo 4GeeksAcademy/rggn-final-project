@@ -1,15 +1,15 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Countries, Posts, Categories
+from flask import Flask, request, jsonify, url_for, Blueprint
+from api.models import db, User, Countries, Posts
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
-
+import cloudinary.uploader as uploader
 from werkzeug.security import generate_password_hash, check_password_hash
 from base64 import b64encode
-import os, base64
+import os
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from datetime import datetime
 import cloudinary.uploader as uploader
@@ -146,21 +146,13 @@ def get_all_posts():
 def save_post(): 
     uid = get_jwt_identity()["user_id"]
     data_form = request.form
-    # files = request.files['img']
-    # cloud_result = current_app.cloudinary.uploader.upload(files.read())
-    print(data_form.get("categories"))
-
-    category = Categories.query.filter_by(name = data_form.get("categories")).first()
-    # country = Countries.query.filter_by(name = data_form.get("country")).first()
-    print(category)
+    data_file = request.files
     data = {
         "title":data_form.get("title"),
         "img": data_file.get("img_post"),
         "comment": data_form.get("comment"),
-        # "date":data_form.get("date"),
         "user_id": uid,
-        "category": category.serialize()["id"],
-        # "country": country.serialize()["id"],
+        "post_category": data_form.get("post_category"),
         # "post_tag": data_form.get("post_tag"),
     }
     # validaciones
@@ -174,12 +166,9 @@ def save_post():
 
 
     post = Posts(
-        title=data["title"], 
-        # img=data["img"],
-        comment=data["comment"],
-        post_category = data["category"],
-        # countries_id = data["country"],
-        # date=data["date"],
+        title=data.get("title"), 
+        img=data.get("img"),
+        comment=data.get("comment"),
         user_id= uid,
         # post_category=data.get("post_category"),
         # post_tag=data.get("post_tag")
