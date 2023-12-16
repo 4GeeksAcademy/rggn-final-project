@@ -3,10 +3,10 @@ import { Context } from "../store/appContext"
 import { Navigate, useNavigate } from "react-router-dom"
 
 const initialState = {
-    img: "",
+    img_post: "",
     title: "",
     comment: "",
-    date: new Date(),
+    // date: new Date(),
     country: "",
     post_category: 0,
     city: ""
@@ -21,33 +21,32 @@ const CreatePost = () => {
 
 
     const handleChange = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         setPost({
             ...post,
             [event.target.name]: event.target.value
         })
-        console.log(post)
+        // console.log(post)
     }
 
     const handlePost = async (event) => {
         event.preventDefault()
 
         const formData = new FormData()
-        formData.append("img", post.img)
+        formData.append("img_post", post.img_post)
         formData.append("title", post.title)
         formData.append("comment", post.comment)
-        formData.append("date", post.date)
+        // formData.append("date", post.date)
         formData.append("country", post.country)
         formData.append("post_category", post.post_category)
         formData.append("city", post.city)
 
 
         let response = await actions.addPost(formData)
-        console.log(post)
         if (response) {
-            navigate("/posts")
+            navigate("/postviews")
         }
-        console.log(response)
+        // console.log(response)
 
     }
 
@@ -161,9 +160,11 @@ const CreatePost = () => {
                                             className="form-control"
                                             type="file"
                                             id="fileImg"
-                                            name="img"
-                                            value={post.img}
-                                            onChange={handleChange}
+                                            name="img_post"
+                                            // value={post.img}
+                                            onChange={(event) => {
+                                                setPost({ ...post, img_post: event.target.files[0] })
+                                            }}
                                         />
                                     </div>
 
