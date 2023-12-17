@@ -1,11 +1,10 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: sessionStorage.getItem("token") || null,
+			user: sessionStorage.getItem("user_id") || null,
 			posts: [],
-
-			token: localStorage.getItem("token") || null,
-			user: sessionStorage.getItem("user_id") || null
-
+			onePost: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -70,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: null
 				})
 			},
-			
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
@@ -130,10 +129,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
 					console.log(response)
-						setStore({ posts: response.data })
+					setStore({ posts: response.data })
 					return response
 				}
 				return false
+			},
+
+			getOnePost: async (id) => {
+				let store = getStore()
+				const { apiFetch } = getActions()
+				try {
+					const response = await apiFetch(`/getOnePost/${id}`)
+					if (response.msg == "ok") {
+						console.log(response)
+						console.log(response.data)
+						setStore({ onePost: response.data })
+						return response
+					}
+				} catch (error) {
+					console.log(error)
+					return false
+				}
+
+				return response
+			},
+
+
+			editPost: async (id, post) => {
+				let store = getStore();
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/editPost/${id}`, {
+						method: "PUT",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+						body: post
+					})
+				} catch (error) {
+					console.log(error)
+				}
 			}
 
 		}

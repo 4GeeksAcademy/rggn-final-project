@@ -181,8 +181,6 @@ def save_post():
     except Exception as error:
         print(error)
         return jsonify({"message":"error creating post"}), 500
-    
-
 
 #editar Post
 @api.route('/editPost/<int:id>', methods=['PUT'])
@@ -216,6 +214,15 @@ def delete_post(id):
     except Exception as error:
         print(error)
         return jsonify({"message":"error deleting post"}), 500
+    
+@api.route('/getOnePost/<int:id>', methods=['GET'])
+def get_one_post(id):
+    one_post = Posts.query.get(id)
+    if one_post is None:
+        return jsonify({"message":"post not found"}), 400
+    # serialized_posts = list(map(lambda x: x.serialize(), posts))
+    # return jsonify (serialized_posts), 200 
+    return jsonify (one_post.serialize()), 200
 
 
 
