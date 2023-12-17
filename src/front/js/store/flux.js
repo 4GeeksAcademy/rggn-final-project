@@ -168,6 +168,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error)
 				}
+			},
+
+			deletePost: async (id) => {
+				let store = getStore();
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/deletePost/${id}`, {
+						method: "DELETE",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+					})
+					let newPosts = store.posts.filter((onePost) => onePost.id != id)
+					setStore({
+						posts: newPosts
+					})
+				} catch (error) {
+					console.log(error)
+				}
 			}
 
 		}
