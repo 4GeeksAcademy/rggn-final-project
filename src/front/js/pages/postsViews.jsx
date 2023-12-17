@@ -19,13 +19,12 @@ export const PostViews = () => {
         getData()
     }, [])
 
+    // const handleEditClick = () => {
 
-    const handleEditClick = () => {
+    //     navigate("/editPost");
+    // };
 
-        navigate("/editPost");
-    };
-
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (id) => {
 
         Swal.fire({
             title: "Estas seguro?",
@@ -37,12 +36,13 @@ export const PostViews = () => {
             confirmButtonText: "Borrar Publicacion"
         }).then((result) => {
             if (result.isConfirmed) {
-
+                actions.deletePost(id)
                 Swal.fire({
                     title: "Borrada",
                     text: "Tu publicacion ha sido borrada.",
                     icon: "success"
                 });
+                navigate("/postviews");
             }
         });
     };
@@ -50,7 +50,6 @@ export const PostViews = () => {
 
     return (
         <>
-
             <div>
                 <div className="post-card d-flex justify-content-center my-posts">
                     <div className="d-flex flex-column bd-highlight mb-3 text-center mt-4 pt-4">
@@ -61,9 +60,15 @@ export const PostViews = () => {
                             return (<div key={post.id} className="card my-card bg-dark text-white" >
                                 <div className="card-header">{post.country}
 
-                                    <FontAwesomeIcon icon={faLocationDot} style={{ color: "#ffffff", float: "left", marginTop: "3px", marginRight: "10px" }} />
-                                    <FontAwesomeIcon icon={faTrashCan} onClick={handleDeleteClick} style={{ color: "#ffffff", float: "right", marginTop: "3px", cursor: "pointer" }} />
-                                    <FontAwesomeIcon icon={faPen} onClick={ () => navigate(`/editpost/${post.id}`)} style={{ color: "#ffffff", float: "right", marginTop: "3px", marginRight: "20px", cursor: "pointer" }} />
+                                    <FontAwesomeIcon
+                                        icon={faLocationDot}
+                                        style={{ color: "#ffffff", float: "left", marginTop: "3px", marginRight: "10px" }} />
+                                    <FontAwesomeIcon
+                                        icon={faTrashCan}
+                                        onClick={() => handleDeleteClick(post.id)} style={{ color: "#ffffff", float: "right", marginTop: "3px", cursor: "pointer" }} />
+                                    <FontAwesomeIcon
+                                        icon={faPen}
+                                        onClick={() => navigate(`/editpost/${post.id}`)} style={{ color: "#ffffff", float: "right", marginTop: "3px", marginRight: "20px", cursor: "pointer" }} />
 
                                 </div>
                                 <img src={post.img} className="card-img-top" alt="..." />
