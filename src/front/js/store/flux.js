@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: sessionStorage.getItem("token") || null,
 			user: sessionStorage.getItem("user_id") || null,
 			posts: [],
-			onePost: []
+			onePost: [],
+			myPosts: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -133,6 +134,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return response
 				}
 				return false
+			},
+
+			getMyPosts: async () => {
+				let store = getStore();
+				// console.log(post)
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/getPostUser`, {
+						method: "GET",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+					}
+					)
+					if (response.ok) {
+						setStore({ myPosts: response.data })
+						return response
+					} else {
+						return false
+					}
+
+				} catch (error) {
+					console.log(error)
+				}
 			},
 
 			getOnePost: async (id) => {

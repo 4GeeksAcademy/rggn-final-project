@@ -201,6 +201,7 @@ def edit_post(id):
         print(error)
         return jsonify({"message":"error editing post"}), 500
 
+#delete Post
 @api.route('/deletePost/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_post(id):
@@ -214,7 +215,8 @@ def delete_post(id):
     except Exception as error:
         print(error)
         return jsonify({"message":"error deleting post"}), 500
-    
+
+#get One Post 4 edit    
 @api.route('/getOnePost/<int:id>', methods=['GET'])
 def get_one_post(id):
     one_post = Posts.query.get(id)
@@ -223,6 +225,18 @@ def get_one_post(id):
     # serialized_posts = list(map(lambda x: x.serialize(), posts))
     # return jsonify (serialized_posts), 200 
     return jsonify (one_post.serialize()), 200
+
+#get Posts that user post it
+@api.route('/getPostUser', methods=['GET'])
+@jwt_required()
+def get_post_user():
+    uid = get_jwt_identity()["user_id"]
+    posts = Posts.query.filter_by(user_id = uid)
+    if posts is None:
+        return jsonify({"message":"posts not found for that user"}), 400
+    
+    allPosts = list(map(lambda x: x.serialize(), posts))
+    return jsonify(allPosts), 200
 
 
 

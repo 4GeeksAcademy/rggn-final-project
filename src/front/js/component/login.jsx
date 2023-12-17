@@ -36,7 +36,7 @@ export const Login = () => {
       });
     } else if (result === 200) {
       // alert("Bienvenido usuario");
-      navigate("/postViews")
+      navigate("/postViewsgeneral")
       Swal.fire({
         title: 'Bienvenido!',
         text: ` Gusto verte viajero!`,

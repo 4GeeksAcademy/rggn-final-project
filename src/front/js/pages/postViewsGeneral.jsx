@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export const PostViews = () => {
+export const PostViewsGeneral = () => {
 
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            const data = await actions.getMyPosts()
+            const data = await actions.getAllPosts()
             // setPosts(data.data)
         }
         getData()
@@ -24,28 +24,28 @@ export const PostViews = () => {
     //     navigate("/editPost");
     // };
 
-    const handleDeleteClick = (id) => {
+    // const handleDeleteClick = (id) => {
 
-        Swal.fire({
-            title: "Estas seguro?",
-            text: "Importante! No podrás revertir esta acción.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Borrar Publicacion"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                actions.deletePost(id)
-                Swal.fire({
-                    title: "Borrada",
-                    text: "Tu publicacion ha sido borrada.",
-                    icon: "success"
-                });
-                navigate("/postviews");
-            }
-        });
-    };
+    //     Swal.fire({
+    //         title: "Estas seguro?",
+    //         text: "Importante! No podrás revertir esta acción.",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#d33",
+    //         cancelButtonColor: "#3085d6",
+    //         confirmButtonText: "Borrar Publicacion"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             actions.deletePost(id)
+    //             Swal.fire({
+    //                 title: "Borrada",
+    //                 text: "Tu publicacion ha sido borrada.",
+    //                 icon: "success"
+    //             });
+    //             navigate("/postviews");
+    //         }
+    //     });
+    // };
 
 
     return (
@@ -63,12 +63,12 @@ export const PostViews = () => {
                                     <FontAwesomeIcon
                                         icon={faLocationDot}
                                         style={{ color: "#ffffff", float: "left", marginTop: "3px", marginRight: "10px" }} />
-                                    <FontAwesomeIcon
+                                    {/* <FontAwesomeIcon
                                         icon={faTrashCan}
                                         onClick={() => handleDeleteClick(post.id)} style={{ color: "#ffffff", float: "right", marginTop: "3px", cursor: "pointer" }} />
                                     <FontAwesomeIcon
                                         icon={faPen}
-                                        onClick={() => navigate(`/editpost/${post.id}`)} style={{ color: "#ffffff", float: "right", marginTop: "3px", marginRight: "20px", cursor: "pointer" }} />
+                                        onClick={() => navigate(`/editpost/${post.id}`)} style={{ color: "#ffffff", float: "right", marginTop: "3px", marginRight: "20px", cursor: "pointer" }} /> */}
 
                                 </div>
                                 <img src={post.img} className="card-img-top" alt="..." />
@@ -86,4 +86,4 @@ export const PostViews = () => {
     )
 }
 
-export default PostViews
+export default PostViewsGeneral
