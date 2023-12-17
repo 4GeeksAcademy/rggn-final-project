@@ -16,7 +16,6 @@ const CreatePost = () => {
     const navigate = useNavigate()
     const { actions } = useContext(Context)
 
-
     const [post, setPost] = useState(initialState)
 
 
@@ -31,6 +30,7 @@ const CreatePost = () => {
 
     const handlePost = async (event) => {
         event.preventDefault()
+       
 
         const formData = new FormData()
         formData.append("img_post", post.img_post)
@@ -38,10 +38,7 @@ const CreatePost = () => {
         formData.append("comment", post.comment)
         // formData.append("date", post.date)
         formData.append("country", post.country)
-        formData.append("post_category", post.post_category)
-        formData.append("city", post.city)
-
-
+        
         let response = await actions.addPost(formData)
         if (response) {
             navigate("/postviews")
@@ -50,10 +47,24 @@ const CreatePost = () => {
 
     }
 
+    // const handleImage = (event)=>{
+    //     console.log(typeof event.target.files[0].type)
+    //     if(event.target.files[0].type === "image/png"){
+    //         let aux = post
+    //         aux.img = event.target.files[0]
+    //         setPost(aux)
+    //         console.log(event.target.files[0])
+    //     }else{
+    //         console.log("No compatible")
+    //     }
+    // }
 
     const countries = ["Venezuela", "Argentina", "Ecuador"]
     const cities = ["Maracaibo", "Buenos Aires", "Quito"]
-
+    
+    // useEffect(() => {
+    //     // console.log(post)
+    // },[post])
     return (
         <>
             <div className="post-container d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
@@ -123,9 +134,9 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault1"
-                                                value={1}
+                                                value="destino"
                                                 onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault1">Destino</label>
@@ -134,9 +145,9 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault2"
-                                                value={2}
+                                                value="gastronomia"
                                                 onChange={handleChange}
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault2">Gastronomía</label>
@@ -145,10 +156,11 @@ const CreatePost = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="post_category"
+                                                name="categories"
                                                 id="flexRadioDefault3"
-                                                value={3}
+                                                value="actividad"
                                                 onChange={handleChange}
+
                                             />
                                             <label className="form-check-label" htmlFor="flexRadioDefault3">Actividad</label>
                                         </div>

@@ -1,8 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			posts: [],
-
 			token: sessionStorage.getItem("token") || null,
 			user: sessionStorage.getItem("user_id") || null,
 			posts: [],
