@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import RggnIcon from "../../img/rggn.png";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context)
+	const navigate = useNavigate();
 	const handleLogout = () => {
 		actions.logOut()
+		navigate("/")
 	}
 
 	return (
