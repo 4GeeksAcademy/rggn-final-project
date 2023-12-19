@@ -73,13 +73,13 @@ const CreatePost = () => {
                     <Navigate to={"/login"} /> :
                     <>
                         <div className="post-container d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
-                            <div className="container mt-5 pt-5">
+                            <div className="container mt-5 pt-3">
                                 <div className="row justify-content-center">
                                     <div className="col-md-5 col-lg-4 left-container">
                                         <div className="card p-2 bg-dark text-white">
-                                            <h1 className="h4 text-center mb-3">Crear publicacion</h1>
+                                            <h1 className="h4 text-center">Crear publicacion</h1>
                                             <form className="container" style={{ width: "100%" }} onSubmit={handlePost}>
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label htmlFor="txtTitle" className="form-label">Título</label>
                                                     <input
                                                         className="form-control"
@@ -92,7 +92,7 @@ const CreatePost = () => {
                                                     />
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label htmlFor="txtComment" className="form-label">Comentario</label>
                                                     <textarea
                                                         className="form-control"
@@ -104,7 +104,7 @@ const CreatePost = () => {
                                                     />
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label htmlFor="country" className="form-label">Pais:</label>
                                                     <select
                                                         className="form-select"
@@ -119,7 +119,7 @@ const CreatePost = () => {
                                                     </select>
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label htmlFor="city" className="form-label">Ciudad:</label>
                                                     <select
                                                         className="form-select"
@@ -133,7 +133,7 @@ const CreatePost = () => {
                                                     </select>
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label className="form-label">Categoria</label>
                                                     <div className="form-check">
                                                         <input
@@ -171,7 +171,7 @@ const CreatePost = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <label htmlFor="fileImg" className="form-label">Cargar Imagen</label>
                                                     <input
                                                         className="form-control"
@@ -185,7 +185,7 @@ const CreatePost = () => {
                                                     />
                                                 </div>
 
-                                                <div className="mb-2">
+                                                <div className="mb-1">
                                                     <button className="btn btn-primary btn-sm w-100"> Crear Publicacion </button>
                                                 </div>
                                             </form>
