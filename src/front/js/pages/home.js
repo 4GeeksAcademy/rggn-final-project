@@ -1,41 +1,67 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React from "react";
+import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeImage from '../../img/landing.jpg';
+import logoImage from '../../img/logotipo.png';
+import '../../styles/index.css';
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
+    const handleLogin = () => {
+        console.log("Iniciar sesión");
+    };
 
-	return (
-		<div className="text-center mt-5">
+    const handleRegister = () => {
+        console.log("Registrarse");
+    };
 
-			<div className="container">
-				<div className="col-12">
-					¡Descubre el encanto del mundo con nosotros! Explora destinos inolvidables, sumérgete en culturas fascinantes y crea recuerdos inigualables. Bienvenido a tu puerta de entrada a la aventura. ¡Viaja con nosotros y haz que cada destino sea una experiencia única!
-				</div>
+    const cardStyle = {
+        position: 'relative',
+        backgroundColor: 'transparent',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        fontFamily: 'Unbounded, sans-serif',
+        marginTop:'15vh',
+        marginRight:'4vh'
+    };
 
-				<div className="card" >
-					<img className="card-img-top" alt="..." />
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" className="btn btn-primary">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-			{/* <h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p> */}
-		</div>
-	);
-};
+    const HomeStyle = {
+        backgroundImage: `url(${HomeImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    };
+
+    return (
+        <div style={HomeStyle}>
+            <div className="container-fluid position-relative">
+                <img
+                    src={logoImage}
+                    alt="Logotipo"
+                    className="fade-up img-fluid position-absolute top-0 mt-3"
+                    style={{ maxWidth: '300px', left: '10px' }}
+                />
+            </div>
+            <div className="container">
+                <div className="" style={cardStyle}>
+                    <div className="card-body">
+                        <h1 className="text-center fade-down">
+                            DESCUBRE <br /> EXPLORA <br /> VIVE
+                        </h1>
+                        <p className="text-center fade-left">
+                            Bienvenido a nuestra comunidad de viajeros y aventureros.
+                            <br /> En nuestro sitio, te ofrecemos la oportunidad de
+                            <br />descubrir destinos emocionantes,
+                            <br /> explorar nuevas culturas y vivir experiencias inolvidables.
+                            <br /> Únete a nosotros mientras exploramos el mundo juntos!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
-import {Context} from "../store/appContext.js";
+import { Context } from "../store/appContext.js";
 import backgroundImage from '../../img/backgroundsignup.jpg';
+import { Link, useNavigate } from "react-router-dom"
 
 export const Signup = () => {
 
   const { store, actions } = useContext(Context)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -26,12 +28,38 @@ export const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Formulario enviado:', formData);
+
   };
 
   const signupClick = async (e) => {
-    e.preventDefault()
-    const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries)
-    console.log(respuesta)
+
+    // e.preventDefault()
+    try {
+      const respuesta = await actions.signup(formData.name, formData.email, formData.password, formData.countries);
+      
+      Swal.fire({
+        title: '¡Registro exitoso!',
+        text: 'Bienvenido a nuestra comunidad.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      if (respuesta && respuesta.msg === "ok") {
+        navigate("/login");
+    }
+    console.log(respuesta);
+    } catch (error) {
+      console.error("Error al realizar el registro:", error);
+
+
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+
   }
 
   const backgroundStyle = {
@@ -39,6 +67,8 @@ export const Signup = () => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '13px'
   };
 
   const countries = ["Venezuela", "Argentina", "Ecuador"]
@@ -50,7 +80,7 @@ export const Signup = () => {
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4">
-            <div className="card p-4 bg-dark text-white">
+            <div className="card p-2 px-3 bg-dark text-white">
               <h2 className="text-center mb-4">Comienza tu aventura!</h2>
               <p className="text-center text-white mb-4">Ya estás registrado? <a href="/login">Inicia sesion aqui</a></p>
 
@@ -118,7 +148,8 @@ export const Signup = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button onClick={signupClick} className="btn btn-primary w-100">Iniciar sesión</button>
+                  <button onClick={signupClick} className="btn btn-primary w-100" >Registrarse</button>                  
+
                 </div>
               </form>
             </div>
