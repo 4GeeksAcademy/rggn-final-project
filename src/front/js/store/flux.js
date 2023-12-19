@@ -39,11 +39,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						let result = await response.json()
 						console.log(result)
+						getActions().getMyPosts()
 						setStore({
 							token: result.token,
 							user_id: result.user_id
 						})
-						localStorage.setItem("token", result.token)
+						sessionStorage.setItem("token", result.token)
 
 					}
 					return response.status
@@ -66,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logOut: () => {
 				sessionStorage.removeItem("token")
+				// localStorage.removeItem("token")
 				setStore({
 					token: null
 				})
@@ -89,6 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addPost: async (post) => {
 				let store = getStore();
+				let actions = getActions()
 				console.log(post)
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
@@ -102,6 +105,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// const data = await response.json()
 					console.log(response)
 					if (response.ok) {
+						actions.getAllPosts()
+						actions.getMyPosts()
 						return true
 					} else {
 						return false
@@ -145,10 +150,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Authorization": `Bearer ${store.token}`
 						},
-					}
-					)
+					})
+					let data = await response.json()
+
 					if (response.ok) {
-						setStore({ myPosts: response.data })
+						console.log(data, "myPost")
+						setStore({ myPosts: data })
 						return response
 					} else {
 						return false
@@ -163,11 +170,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let store = getStore()
 				const { apiFetch } = getActions()
 				try {
-					const response = await apiFetch(`/getOnePost/${id}`)
-					if (response.msg == "ok") {
+
+					let response = await fetch(`${process.env.BACKEND_URL}/getOnePost/${id}`, {
+						method: "GET",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+					})
+					let data = await response.json()
+					if (response.ok) {
 						console.log(response)
 						console.log(response.data)
-						setStore({ onePost: response.data })
+						setStore({ onePost: data })
 						return response
 					}
 				} catch (error) {

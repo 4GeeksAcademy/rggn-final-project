@@ -46,7 +46,7 @@ export const EditPost = () => {
 
   return (
     <>
-      {store.token = null ?
+      {store.token === null ?
         <Navigate to={"/login"} /> :
         <>
           <div className="donations-area d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>

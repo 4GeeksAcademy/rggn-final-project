@@ -218,6 +218,7 @@ def delete_post(id):
 
 #get One Post 4 edit    
 @api.route('/getOnePost/<int:id>', methods=['GET'])
+@jwt_required()
 def get_one_post(id):
     one_post = Posts.query.get(id)
     if one_post is None:
