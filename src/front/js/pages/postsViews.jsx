@@ -57,8 +57,18 @@ export const PostViews = () => {
                     <div className="d-flex flex-column bd-highlight mb-3 text-center mt-4 pt-4">
                         <h1 className="text-white my-5 ms-2 text-center">Tus Publicaciones</h1>
 
-                        {store.posts == false && <p>hubo un error al cargar posts</p>}
-                        {store.posts && store.posts.length > 0 && store.posts.map((post, index) => {
+                        {/* {store.myPost ==  && <p>hubo un error al cargar posts</p>}
+                        {
+                            store.myPosts.length <= 0 ?
+                                <h1>No has cargado tu primer post todavía</h1> :
+                                store.myPosts.map((item) => {
+                                    return (
+                                        <p>{item.id}</p>
+                                    )
+                                })
+                        } */}
+
+                        {store.myPosts && store.myPosts.length > 0 && store.myPosts.map((post, index) => {
                             return (<div key={post.id} className="card my-card bg-dark text-white" >
                                 <div className="card-header">{post.country}
 
