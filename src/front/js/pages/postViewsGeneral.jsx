@@ -55,7 +55,7 @@ export const PostViewsGeneral = () => {
                 store.token == null ?
                     <Navigate to={"/login"} /> :
                     <>
-                        <div>
+                        <div className="post-views-container">
                             <div className="post-card d-flex justify-content-center my-posts">
                                 <div className="d-flex flex-column bd-highlight mb-3 text-center mt-4 pt-4">
                                     <h1 className="text-white my-5 ms-2 text-center">Publicaciones</h1>

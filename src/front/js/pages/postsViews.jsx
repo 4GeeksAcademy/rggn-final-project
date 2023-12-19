@@ -34,7 +34,7 @@ export const PostViews = () => {
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Borrar Publicacion"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 actions.deletePost(id)
                 Swal.fire({
@@ -48,12 +48,14 @@ export const PostViews = () => {
     };
 
 
+
+
     return (
         <>
-            <div>
+            <div className="post-views-container">
                 <div className="post-card d-flex justify-content-center my-posts">
                     <div className="d-flex flex-column bd-highlight mb-3 text-center mt-4 pt-4">
-                        <h1 className="text-white my-5 ms-2 text-center">Publicaciones</h1>
+                        <h1 className="text-white my-5 ms-2 text-center">Tus Publicaciones</h1>
 
                         {store.posts == false && <p>hubo un error al cargar posts</p>}
                         {store.posts && store.posts.length > 0 && store.posts.map((post, index) => {

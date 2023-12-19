@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlaneDeparture, faPlaneArrival, faUser, faUsers, faBriefcase, faBriefcaseClock } from '@fortawesome/free-solid-svg-icons';
+import { faPlaneDeparture, faPlaneArrival, faUser, faUsers, faChalkboardUser, faChalkboard } from '@fortawesome/free-solid-svg-icons';
 
 
 const estiloFondo = {
@@ -35,8 +35,8 @@ export const Services = () => {
             ) : (
               <FontAwesomeIcon icon={faPlaneDeparture} style={{ color: "#ffffff", fontSize: "3rem" }} />
             )}
-            <h2 className="card-text mt-3">Aventurate!</h2>
-            <h5 className="card-text text-center mt-3">Da el salto de una vez!<br></br><br></br>Explora más, preocúpate menos</h5>
+            <h2 className="card-text mt-3">Aventurate</h2>
+            <h5 className="card-text text-center mt-3">Da el salto de una vez!<br></br><br></br>Explora más, preocúpate menos.</h5>
           </div>
         </div>
       </div>
@@ -67,12 +67,12 @@ export const Services = () => {
         >
           <div className="card-body d-flex flex-column align-items-center justify-content-center p-4">
             {isHovered3 ? (
-              <FontAwesomeIcon icon={faBriefcaseClock} style={{ color: "#fafafa", fontSize: "3rem" }} />
+              <FontAwesomeIcon icon={faChalkboardUser} style={{color: "#ffffff", fontSize: "3rem" }} />
             ) : (
-              <FontAwesomeIcon icon={faBriefcase} style={{ color: "#ffffff", fontSize: "3rem" }} />
+              <FontAwesomeIcon icon={faChalkboard} style={{color: "#ffffff", fontSize: "3rem" }} />
             )}
-            <h2 className="card-text mt-3">Ágil</h2>
-            <h5 className="card-text text-center mt-3">Ahorramos tu tiempo<br></br><br></br>Menos esperas, más experiencias</h5>
+            <h2 className="card-text mt-3">Comparte</h2>
+            <h5 className="card-text text-center mt-3">Comparte tu aventura<br></br><br></br>Haz una publicacion para insipirar!</h5>
           </div>
         </div>
       </div>
