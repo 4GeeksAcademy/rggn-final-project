@@ -8,9 +8,12 @@ from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
+import cloudinary
+import cloudinary.uploader
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from datetime import timedelta
 
 # from models import Person
 
@@ -34,7 +37,17 @@ db.init_app(app)
 
 # flask_jwt_extended
 app.config["JWT_SECRET_KEY"] = os.getenv("FLASK_APP_KEY")   # Change this!
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=60)
 jwt = JWTManager(app)
+
+#Configuración Cloudinary
+cloudinary.config( 
+  cloud_name = os.getenv("CLOUD_NAME"), 
+  api_key = os.getenv("CLOUD_API_KEY"), 
+  api_secret = os.getenv("CLOUD_API_SECRET"),
+  secure = True 
+)
+app.cloudinary = cloudinary
 
 # add the admin
 setup_admin(app)

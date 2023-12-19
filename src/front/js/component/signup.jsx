@@ -45,7 +45,7 @@ export const Signup = () => {
       });
 
       if (respuesta && respuesta.msg === "ok") {
-        navigate("/postviews");
+        navigate("/login");
     }
     console.log(respuesta);
     } catch (error) {

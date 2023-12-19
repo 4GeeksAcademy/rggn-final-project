@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import backgroundsignup from '../../img/backgroundsignup.jpg';
 import { Context } from "../store/appContext";
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate, Link } from "react-router-dom"
 import Swal from 'sweetalert2'
 
 
@@ -36,7 +36,7 @@ export const Login = () => {
       });
     } else if (result === 200) {
       // alert("Bienvenido usuario");
-      // navigate(posts)
+      navigate("/postViewsgeneral")
       Swal.fire({
         title: 'Bienvenido!',
         text: ` Gusto verte viajero!`,
@@ -62,7 +62,7 @@ export const Login = () => {
           <div className="col-md-6 col-lg-4">
             <div className="card p-4 bg-dark text-white">
               <h2 className="text-center mb-4">Bienvenido!</h2>
-              <p className="text-center text-white mb-4">Aun no estas registrado? <a href="/signup">Entra aqui</a></p>
+              <p className="text-center text-white mb-4">Aun no estas registrado? <Link to="/signup">Entra aqui</Link></p>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">Correo Electrónico:</label>

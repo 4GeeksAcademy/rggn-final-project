@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Countries, Posts, Tags, Post_Tag
+from api.models import db, User, Countries, Posts
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import json
@@ -12,6 +12,7 @@ from base64 import b64encode
 import os
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from datetime import datetime
+import cloudinary.uploader as uploader
 
 api = Blueprint('api', __name__)
 
@@ -55,6 +56,7 @@ def handle_login():
                 return jsonify({"token":token}), 200
             else:
                 return jsonify({"message":"bad credentials"}), 400
+            
 @api.route('/user', methods=['GET'])
 def get_all_users():
     users = User.query.all()
@@ -147,12 +149,20 @@ def save_post():
     data_file = request.files
     data = {
         "title":data_form.get("title"),
-        "img": 'data_file.get("img")',
+        "img": data_file.get("img_post"),
         "comment": data_form.get("comment"),
         "user_id": uid,
         "post_category": data_form.get("post_category"),
         # "post_tag": data_form.get("post_tag"),
     }
+    # validaciones
+
+    #guardamos image en cloudinary
+    result_img_post = uploader.upload(data_file.get("img_post"))
+    
+    data.update({"img":result_img_post.get("secure_url")})
+    # data.update({"img":result_img_post.get("secure_url")})
+
 
 
     post = Posts(
@@ -191,6 +201,7 @@ def edit_post(id):
         print(error)
         return jsonify({"message":"error editing post"}), 500
 
+#delete Post
 @api.route('/deletePost/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_post(id):
@@ -204,6 +215,28 @@ def delete_post(id):
     except Exception as error:
         print(error)
         return jsonify({"message":"error deleting post"}), 500
+
+#get One Post 4 edit    
+@api.route('/getOnePost/<int:id>', methods=['GET'])
+def get_one_post(id):
+    one_post = Posts.query.get(id)
+    if one_post is None:
+        return jsonify({"message":"post not found"}), 400
+    # serialized_posts = list(map(lambda x: x.serialize(), posts))
+    # return jsonify (serialized_posts), 200 
+    return jsonify (one_post.serialize()), 200
+
+#get Posts that user post it
+@api.route('/getPostUser', methods=['GET'])
+@jwt_required()
+def get_post_user():
+    uid = get_jwt_identity()["user_id"]
+    posts = Posts.query.filter_by(user_id = uid)
+    if posts is None:
+        return jsonify({"message":"posts not found for that user"}), 400
+    
+    allPosts = list(map(lambda x: x.serialize(), posts))
+    return jsonify(allPosts), 200
 
 
 

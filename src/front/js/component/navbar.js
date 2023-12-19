@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import RggnIcon from "../../img/rggn.png";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context)
+	const navigate = useNavigate();
 	const handleLogout = () => {
 		actions.logOut()
+		navigate("/")
 	}
 
 	return (
@@ -72,7 +75,13 @@ export const Navbar = () => {
 								<Link to="/createPost">
 									<button className="btn btn-info bg-dark text-info me-4 mt-1">Create Post</button>
 								</Link>
-								<button className="btn btn-danger mx-2" onClick={handleLogout}>logOut</button>
+								<Link to="/postviews">
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">View My Post</button>
+								</Link>
+								<Link to="/postviewsgeneral">
+									<button className="btn btn-info bg-dark text-info me-4 mt-1">View Post</button>
+								</Link>
+								<button className="btn btn-danger bg-dark text-danger me-4 my-1" onClick={handleLogout}>logOut</button>
 							</>)}
 					</ul>
 				</div>

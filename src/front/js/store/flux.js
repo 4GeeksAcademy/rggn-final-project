@@ -1,23 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
-
 			token: sessionStorage.getItem("token") || null,
-			user: sessionStorage.getItem("user_id") || null
-
+			user: sessionStorage.getItem("user_id") || null,
+			posts: [],
+			onePost: [],
+			myPosts: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -72,30 +60,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { apiFetch } = getActions()
 				const respuesta = await apiFetch("/signup", "POST", { name, email, password, countries })
 				console.log(respuesta)
+				return respuesta
 
-				// try {
-				// 	const response = await fetch('/signup', {
-				// 		method: 'POST',
-				// 		headers: {
-				// 			'Content-Type': 'application/json',
-				// 		},
-				// 		body: JSON.stringify({
-				// 			email: formData.get('email'),
-				// 			name: formData.get('name'),
-				// 			password: formData.get('password'),
-				// 			countries: formData.get('countries'),
-				// 		}),
-				// 	});
-
-				// 	if (!response.ok) {
-				// 		throw new Error('Error al crear el usuario');
-				// 	}
-
-				// 	const data = await response.json();
-				// 	console.log('Usuario creado exitosamente:', data.msg);
-				// } catch (error) {
-				// 	console.error('Error:', error.message);
-				// }
 			},
 
 			logOut: () => {
@@ -105,21 +71,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
+			changeColor: (index, color) => {
+				//get the store
+				const store = getStore();
 
+				//we have to loop the entire demo array to look for the respective index
+				//and change its color
+				const demo = store.demo.map((elm, i) => {
+					if (i === index) elm.background = color;
+					return elm;
+				});
+
+
+				//reset the global store
+				setStore({ demo: demo });
+			},
 
 			addPost: async (post) => {
 				let store = getStore();
+				console.log(post)
 				try {
 					let response = await fetch(`${process.env.BACKEND_URL}/posts`, {
+						method: "POST",
 						headers: {
 							"Authorization": `Bearer ${store.token}`
 						},
-						method: "POST",
 						body: post
 					}
 					)
-					const data = await response.json()
-					console.log(data)
+					// const data = await response.json()
+					console.log(response)
 					if (response.ok) {
 						return true
 					} else {
@@ -143,61 +124,96 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
 
 			getAllPosts: async () => {
 				const { apiFetch } = getActions()
 				const response = await apiFetch("/posts")
 				if (response.msg == "ok") {
+					console.log(response)
+					setStore({ posts: response.data })
 					return response
 				}
 				return false
 			},
 
-			
-			deletePost: async (postId) => {
+			getMyPosts: async () => {
+				let store = getStore();
+				// console.log(post)
 				try {
-					const store = getStore();
-			
-					const postToDelete = await Posts.query.get(postId);
-			
-					if (!postToDelete) {
-						console.error('La publicación no existe.');
-						return;
+					let response = await fetch(`${process.env.BACKEND_URL}/getPostUser`, {
+						method: "GET",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
 					}
-			
-					await db.session.delete(postToDelete);
-					await db.session.commit();
-			
-					const updatedPosts = await getActions().getAllPosts();
-			
-					setStore({ ...store, posts: updatedPosts });
-			
-				} catch (deleteError) {
-					console.error('Error al borrar la publicación:', deleteError.message);
+					)
+					if (response.ok) {
+						setStore({ myPosts: response.data })
+						return response
+					} else {
+						return false
+					}
+
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			getOnePost: async (id) => {
+				let store = getStore()
+				const { apiFetch } = getActions()
+				try {
+					const response = await apiFetch(`/getOnePost/${id}`)
+					if (response.msg == "ok") {
+						console.log(response)
+						console.log(response.data)
+						setStore({ onePost: response.data })
+						return response
+					}
+				} catch (error) {
+					console.log(error)
+					return false
+				}
+
+				return response
+			},
+
+
+			editPost: async (id, post) => {
+				let store = getStore();
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/editPost/${id}`, {
+						method: "PUT",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+						body: post
+					})
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			deletePost: async (id) => {
+				let store = getStore();
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/deletePost/${id}`, {
+						method: "DELETE",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						},
+					})
+					let newPosts = store.posts.filter((onePost) => onePost.id != id)
+					setStore({
+						posts: newPosts
+					})
+				} catch (error) {
+					console.log(error)
 				}
 			}
-
 
 		}
 	};
 };
-
-
-
-
 
 export default getState;
